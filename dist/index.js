@@ -1,1 +1,1 @@
-export { CBase } from "./cbase.js";
+export { CBase } from "./components/cbase/cbase.js";

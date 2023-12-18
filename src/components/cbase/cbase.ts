@@ -1,4 +1,4 @@
-class CBase extends HTMLElement {
+export class CBase extends HTMLElement {
     value: string;
     constructor() {
       
@@ -18,4 +18,8 @@ class CBase extends HTMLElement {
   
   customElements.define("c-base", CBase);
 
-export { CBase };
+  declare global {
+    interface HTMLElementTagNameMap {
+      "c-base": CBase,
+    }
+  }

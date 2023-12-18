@@ -1,11 +1,11 @@
-class CBase extends HTMLElement {
+export class CBase extends HTMLElement {
+    value;
     constructor() {
         super();
         this.value = "";
     }
     connectedCallback() {
-        var _a;
-        this.value = (_a = this.getAttribute("value")) !== null && _a !== void 0 ? _a : "";
+        this.value = this.getAttribute("value") ?? "";
         this.render();
     }
     render() {
@@ -13,4 +13,3 @@ class CBase extends HTMLElement {
     }
 }
 customElements.define("c-base", CBase);
-export { CBase };
