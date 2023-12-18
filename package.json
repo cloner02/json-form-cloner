@@ -1,0 +1,13 @@
+{
+  "name": "json-form-cloner",
+  "version": "0.0.1",
+  "description": "Create forms from a Json",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
