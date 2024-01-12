@@ -8,6 +8,15 @@
 </head>
 <body>
     <c-base value="hola mundo"></c-base>
+    <c-form bodyjson="{
+        'name': {
+            'type': 'text',
+            'label': 'Nombre',
+            'value': 'Juan',
+            'required': true
+          },
+        }"
+    ></c-form>
     <script type="module" src="../dist/index.js"></script>
 </body>
 </html>
