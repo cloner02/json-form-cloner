@@ -1,16 +1,31 @@
 {
   "name": "json-form-cloner",
-  "version": "0.0.1",
-  "description": "Create forms from a Json",
-  "main": "index.js",
+  "version": "0.0.1a",
+  "description": "Create forms from a property type of Json or with web components",
+  "keywords": [
+    "json",
+    "form",
+    "web",
+    "components"
+  ],
+  "main": "dist-node/index.js",
+  "browser": "dist-browser/index.js",
   "scripts": {
-    "build": "tsc",
+    "build-browser": "npx tsc --outDir dist-browser --module ES6",
+    "build-node": "npx tsc --outDir dist-node --module CommonJS",
+    "build": "npm run build-browser && npm run build-node",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": {
+    "name": "Miguel Guevara",
+    "email": "cloner17@gmail.com"
+  },
+  "license": "MIT",
   "devDependencies": {
-    "typescript": "^5.3.3"
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
   }
 }

@@ -1,4 +1,4 @@
-import { CBase } from "../cbase/cbase";
+import { CBase } from "../cbase/cbase.js";
 
 export class CForm extends CBase {
     bodyjson: string;
