@@ -1,6 +1,6 @@
 {
   "name": "json-form-cloner",
-  "version": "0.0.1a",
+  "version": "0.0.2",
   "description": "Create forms from a property type of Json or with web components",
   "keywords": [
     "json",
@@ -10,6 +10,7 @@
   ],
   "main": "dist-node/index.js",
   "browser": "dist-browser/index.js",
+  "homepage": "https://github.com/cloner02/json-form-cloner#readme",
   "repository": {
     "type": "git",
     "url": "https://github.com/cloner02/json-form-cloner"
