@@ -1,19 +1,41 @@
-import { CBase } from "../cbase/cbase.js";
+import { CBase, IProperties } from "../cbase/cbase.js";
+
+interface IPropertiesForm extends IProperties {
+  bodyjson: string,
+}
 
 export class CForm extends CBase {
     bodyjson: string;
+    static observedAttributes = ["value","bodyjson"];
     constructor() {
-      
       super();
       this.bodyjson = "{}";
     }
-  
-    connectedCallback() {
-      this.render();
+
+    getTemplate(): HTMLTemplateElement {
+      const template = document.createElement("template");
+      template.innerHTML = `
+        <form>${this.bodyjson}</form>
+      `;
+      return template;
     }
   
-    render() {
-      this.innerHTML = `<form>${this.value}</form>`;
+    connectedCallback(): void {
+      this.bodyjson = this.getAttribute("bodyjson") ?? this.bodyjson;
+      this.render();
+    }
+
+    adoptedCallback(): void {
+      console.log("adoptedCallback");
+    }
+
+    attributeChangedCallback(name:any, oldValue:any, newValue:any): void {
+      super.attributeChangedCallback(name, oldValue, newValue);
+      console.log("attributeChangedCallback");
+    }
+
+    render(): void {
+      super.render();
     }
   }
   
