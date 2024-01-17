@@ -1,23 +1,35 @@
 export interface IProperties {
   value: string,
-  getTemplate(): HTMLTemplateElement,
+  html(): string,
+  css(): string,
 }
 
 export class CBase extends HTMLElement implements IProperties {
     value: string;
     static observedAttributes = ["value"];
     constructor() {
-      
+
       super();
       this.value = "";
       this.attachShadow({ mode: "open" });
     }
 
-    getTemplate(): HTMLTemplateElement {
+    html(): string {
+      return  `
+                <div>${this.value}</div>
+              `;
+    }
+    css(): string {
+      return  `
+                div {
+                  color: red;
+                }    
+            `;
+    }
+
+    template(): HTMLTemplateElement {
       const template = document.createElement("template");
-      template.innerHTML = `
-        <div>${this.value}</div>
-      `;
+      template.innerHTML = `${this.html()}<style>${this.css()}</style>`;
       return template;
     }
 
@@ -52,7 +64,7 @@ export class CBase extends HTMLElement implements IProperties {
   
   
     render() {
-      this.shadowRoot?.append(document.importNode(this.getTemplate().content,true));
+      this.shadowRoot?.append(document.importNode(this.template().content,true));
     }
   }
   

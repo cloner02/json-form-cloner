@@ -1,6 +1,7 @@
 {
   "name": "json-form-cloner",
   "version": "0.0.3",
+  "type": "module",
   "description": "Create forms from a property type of Json or with web components",
   "keywords": [
     "json",
@@ -16,9 +17,13 @@
     "url": "https://github.com/cloner02/json-form-cloner"
   },
   "scripts": {
+    "clean": "node tools/clean.js",
+    "dev": "npm run clean && npm run copy-filesToDist-browser && npx tsc --outDir dist-browser --module ES6 --watch",
+    "copy-filesToDist-node": "node tools/copyfiles --source ./src/style --destination ./dist-node/style",
+    "copy-filesToDist-browser": "node tools/copyfiles --source ./src/style --destination ./dist-browser/style",
     "build-browser": "npx tsc --outDir dist-browser --module ES6",
     "build-node": "npx tsc --outDir dist-node --module CommonJS",
-    "build": "npm run build-browser && npm run build-node",
+    "build": "npm run clean && npm run copy-filesToDist-node && npm run copy-filesToDist-browser && npm run build-browser && npm run build-node",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": {
@@ -28,9 +33,6 @@
   "license": "MIT",
   "devDependencies": {
     "ts-loader": "^9.5.1",
-    "typescript": "^5.3.3",
-    "webpack": "^5.89.0",
-    "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1"
+    "typescript": "^5.3.3"
   }
 }

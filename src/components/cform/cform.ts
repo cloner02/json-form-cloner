@@ -12,12 +12,15 @@ export class CForm extends CBase {
       this.bodyjson = "{}";
     }
 
-    getTemplate(): HTMLTemplateElement {
-      const template = document.createElement("template");
-      template.innerHTML = `
-        <form>${this.bodyjson}</form>
-      `;
-      return template;
+    html(): string {
+      return `<form>${this.bodyjson}</form>`;
+    }
+    css(): string {
+      return `
+              form {
+                color: blue;
+              }
+              `;
     }
   
     connectedCallback(): void {

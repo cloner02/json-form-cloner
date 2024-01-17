@@ -5,7 +5,7 @@ export class CInput extends CBase {
       super();
     }
 
-    getTemplate(): HTMLTemplateElement {
+    template(): HTMLTemplateElement {
       const template = document.createElement("template");
       template.innerHTML = `
         <input value='${this.value}'></input>
