@@ -1,6 +1,6 @@
 {
   "name": "json-form-cloner",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "type": "commonjs",
   "description": "Create forms from a property type of Json or with web components",
   "keywords": [
