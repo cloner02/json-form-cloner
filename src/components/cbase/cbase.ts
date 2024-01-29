@@ -1,3 +1,4 @@
+
 export interface IProperties {
   value: string,
   html(): string,
@@ -15,6 +16,7 @@ export class CBase extends HTMLElement implements IProperties {
     }
 
     html(): string {
+      console.log('htmlvar');
       return  `
                 <div>${this.value}</div>
               `;
@@ -36,10 +38,10 @@ export class CBase extends HTMLElement implements IProperties {
     [key: string]: any; // Add index signature to allow indexing with a string parameter
 
     applyValues(): void {
-      let listProperties: Array<string> = Object.getOwnPropertyNames(this);
+      const listProperties: Array<string> = Object.getOwnPropertyNames(this);
       listProperties.forEach((property:string) => 
       {
-        let attributeValue = this.attributes.getNamedItem(property)?.value;
+        const attributeValue = this.attributes.getNamedItem(property)?.value;
         if(attributeValue !== undefined)
           this[property] = attributeValue;
       });

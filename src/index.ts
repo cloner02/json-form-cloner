@@ -1,2 +1,2 @@
-export {CBase} from "./components/cbase/cbase.js";
-export {CForm} from "./components/cform/cform.js";
+export {CBase} from "./components/cbase/cbase";
+export {CForm} from "./components/cform/cform";

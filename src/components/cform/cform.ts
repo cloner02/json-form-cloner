@@ -1,4 +1,4 @@
-import { CBase, IProperties } from "../cbase/cbase.js";
+import { CBase, IProperties } from "../cbase/cbase";
 
 interface IPropertiesForm extends IProperties {
   bodyjson: string,

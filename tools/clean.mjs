@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-const paths = ['./dist-browser', './dist-node'];
+const paths = ['./dist-node'];
 for (const path of paths) {
 	console.log('path', path);
 	if (fs.existsSync(path)) {
