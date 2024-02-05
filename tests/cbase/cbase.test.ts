@@ -1,5 +1,4 @@
 const  { CBase, CForm} = require('json-form-cloner');
-
 describe('CBase component', () => {
     const CBASE_TAG = 'c-base';
     const getShadowRoot = (tagName: string): ShadowRoot | null => {

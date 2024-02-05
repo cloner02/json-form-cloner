@@ -1,51 +1,52 @@
-import { CBase, IProperties } from "../cbase/cbase";
+import { CBase, type IProperties } from '../cbase/cbase'
 
 interface IPropertiesForm extends IProperties {
-  bodyjson: string,
+  bodyjson: string
 }
 
-export class CForm extends CBase {
-    bodyjson: string;
-    static observedAttributes = ["value","bodyjson"];
-    constructor() {
-      super();
-      this.bodyjson = "{}";
-    }
+export class CForm extends CBase implements IPropertiesForm {
+  bodyjson: string
+  static observedAttributes = ['value', 'bodyjson']
+  constructor () {
+    super()
+    this.bodyjson = '{}'
+  }
 
-    html(): string {
-      return `<form>${this.bodyjson}</form>`;
-    }
-    css(): string {
-      return `
+  html (): string {
+    return `<form>${this.bodyjson}</form>`
+  }
+
+  css (): string {
+    return `
               form {
                 color: blue;
               }
-              `;
-    }
-  
-    connectedCallback(): void {
-      this.bodyjson = this.getAttribute("bodyjson") ?? this.bodyjson;
-      this.render();
-    }
-
-    adoptedCallback(): void {
-      console.log("adoptedCallback");
-    }
-
-    attributeChangedCallback(name:any, oldValue:any, newValue:any): void {
-      super.attributeChangedCallback(name, oldValue, newValue);
-      console.log("attributeChangedCallback");
-    }
-
-    render(): void {
-      super.render();
-    }
+              `
   }
-  
-  customElements.define("c-form", CForm);
 
-  declare global {
-    interface HTMLElementTagNameMap {
-      "c-form": CForm,
-    }
+  connectedCallback (): void {
+    this.bodyjson = this.getAttribute('bodyjson') ?? this.bodyjson
+    this.render()
   }
+
+  adoptedCallback (): void {
+    console.log('adoptedCallback')
+  }
+
+  attributeChangedCallback (name: any, oldValue: any, newValue: any): void {
+    super.attributeChangedCallback(name, oldValue, newValue)
+    console.log('attributeChangedCallback')
+  }
+
+  render (): void {
+    super.render()
+  }
+}
+
+customElements.define('c-form', CForm)
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'c-form': CForm
+  }
+}
