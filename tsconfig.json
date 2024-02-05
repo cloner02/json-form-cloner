@@ -107,5 +107,5 @@
     "skipLibCheck": true                                /* Skip type checking all .d.ts files. */
   },
   "include": ["src/**/*","**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules/**/*","tests/**/*", "jest.config.js", "webpack.config.js"]
+  "exclude": ["node_modules/**/*","tests/**/*","jest.config.ts","webpack.config.js"]
 }
