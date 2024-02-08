@@ -12,7 +12,7 @@
     },
     "overrides": [
         {
-          "files": ["*.ts", "*.tsx","*.test.ts"],
+          "files": ["*.ts", "*.tsx","*.test.ts","*.mjs"],
           "parserOptions": {
             "project": "./tsconfig.eslint.json"
           }
