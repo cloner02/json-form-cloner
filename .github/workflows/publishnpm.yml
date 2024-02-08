@@ -1,7 +1,7 @@
 name: Build and Deploy to S3 the React App
 on:
   release:
-    types: [created, published]
+    types: [created]
 
 jobs:
   build_and_deploy:
