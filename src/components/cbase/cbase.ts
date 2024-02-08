@@ -1,3 +1,5 @@
+import * as style from './../../style/cbase/style.css'
+
 export interface IProperties {
   value: string
   html: () => string
@@ -20,6 +22,7 @@ export class CBase extends HTMLElement implements IProperties {
   }
 
   css (): string {
+    console.log(style, 'style')
     return `
                 div {
                   color: red;

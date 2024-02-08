@@ -19,6 +19,12 @@ module.exports = {
             {
                 test: /\.html$/,
                 use: 'raw-loader',
+                exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
+                exclude: /node_modules/
             }
         ]
     },

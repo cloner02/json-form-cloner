@@ -9,5 +9,15 @@
         "sourceType": "module"
     },
     "rules": {
-    }
+    },
+    "overrides": [
+        {
+          "files": ["*.ts", "*.tsx","*.test.ts"],
+          "parserOptions": {
+            "project": "./tsconfig.eslint.json"
+          }
+        }
+    ]
+   
+   
 }
