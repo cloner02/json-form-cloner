@@ -1,0 +1,9 @@
+{
+    "verbose": true,
+    "watch": ["src/"],
+    "exec": "npm run build:dev",
+    "ext": "ts,css,html,json",
+    "pollingInterval": 100,
+    "legacyWatch": true
+}
+
