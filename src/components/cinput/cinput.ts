@@ -1,16 +1,21 @@
-import { CBase } from '../cbase/cbase'
+import { CBase, type IBaseProperties } from '../cbase/cbase'
+import { type ITypeInupt } from './type/index'
 
-export class CInput extends CBase {
-  constructor () {
+interface IPropertiesInput extends IBaseProperties {
+  typeInput: ITypeInupt
+}
+
+export class CInput extends CBase implements IPropertiesInput {
+  typeInput: ITypeInupt
+  constructor (value: string, typeInput: ITypeInupt) {
     super()
-    this.value = ''
+    this.value = value
+    this.typeInput = typeInput
   }
 
   template (): HTMLTemplateElement {
     const template = document.createElement('template')
-    template.innerHTML = `
-        <input value='${this.value}'></input>
-      `
+    template.innerHTML = this.typeInput.template(this.value)
     return template
   }
 

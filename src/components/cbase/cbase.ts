@@ -1,13 +1,9 @@
-import * as style from './../../style/cbase/style.css'
-
-export interface IProperties {
-  value: string
-  html: () => string
-  css: () => string
+export interface IBaseProperties {
+  value: any
 }
 
-export class CBase extends HTMLElement implements IProperties {
-  value: string
+export abstract class CBase extends HTMLElement implements IBaseProperties {
+  value: any
   static observedAttributes = ['value']
   constructor () {
     super()
@@ -16,18 +12,11 @@ export class CBase extends HTMLElement implements IProperties {
   }
 
   html (): string {
-    return `
-                <div>${this.value}</div>
-              `
+    return ''
   }
 
   css (): string {
-    console.log(style, 'style')
-    return `
-                div {
-                  color: red;
-                }    
-            `
+    return ''
   }
 
   template (): HTMLTemplateElement {
@@ -63,13 +52,5 @@ export class CBase extends HTMLElement implements IProperties {
 
   render (): void {
     this.shadowRoot?.append(document.importNode(this.template().content, true))
-  }
-}
-
-customElements.define('c-base', CBase)
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'c-base': CBase
   }
 }

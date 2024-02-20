@@ -1,6 +1,6 @@
-import { CBase, type IProperties } from '../cbase/cbase'
+import { CBase, type IBaseProperties } from '../cbase/cbase'
 
-interface IPropertiesForm extends IProperties {
+interface IPropertiesForm extends IBaseProperties {
   bodyjson: string
 }
 
