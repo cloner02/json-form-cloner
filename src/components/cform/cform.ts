@@ -1,4 +1,5 @@
 import { CBase, type IBaseProperties } from '../cbase/cbase'
+import style from './../../style/cForm/style.css'
 
 interface IPropertiesForm extends IBaseProperties {
   bodyjson: string
@@ -17,11 +18,9 @@ export class CForm extends CBase implements IPropertiesForm {
   }
 
   css (): string {
-    return `
-              form {
-                color: blue;
-              }
-              `
+    console.log(style)
+    // eslint-disable-next-line @typescript-eslint/no-base-to-string, @typescript-eslint/restrict-template-expressions
+    return `${style}`
   }
 
   connectedCallback (): void {

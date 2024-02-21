@@ -1,13 +1,13 @@
 import { CBase, type IBaseProperties } from '../cbase/cbase'
-import { type ITypeInupt } from './type/index'
+import { type ITypeInput } from './type/index'
 
 interface IPropertiesInput extends IBaseProperties {
-  typeInput: ITypeInupt
+  typeInput: ITypeInput
 }
 
 export class CInput extends CBase implements IPropertiesInput {
-  typeInput: ITypeInupt
-  constructor (value: string, typeInput: ITypeInupt) {
+  typeInput: ITypeInput
+  constructor (value: string, typeInput: ITypeInput) {
     super()
     this.value = value
     this.typeInput = typeInput

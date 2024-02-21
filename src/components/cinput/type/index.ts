@@ -1,9 +1,11 @@
-export interface ITypeInupt {
+interface ITypeInput {
   template: (value: any) => string
 }
 
-export class ITextInput implements ITypeInupt {
+class ITextInput implements ITypeInput {
   template (value: any): string {
     return `<input value='${value}'></input>`
   }
 }
+
+export { ITextInput, type ITypeInput }

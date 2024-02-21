@@ -5,7 +5,7 @@ module.exports = {
     entry: "./src/index.ts",
     output: {
         path: __dirname + "/dist-webpack",
-        filename: "bundle.js"
+        filename: "bundle.js",
     },
     module: {
         rules: [
@@ -23,8 +23,7 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader'],
-                exclude: /node_modules/
+                use: ['css-loader']
             }
         ]
     },
