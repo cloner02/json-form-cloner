@@ -21,7 +21,9 @@ export abstract class CBase extends HTMLElement implements IBaseProperties {
 
   template (): HTMLTemplateElement {
     const template = document.createElement('template')
-    template.innerHTML = `${this.html()}<style>${this.css()}</style>`
+    const componentHtml = this.html().replace(/\$\{(\w+|\.)+\}/g, (_, key) => this[key])
+    const componentCss = this.css()
+    template.innerHTML = `${componentHtml}<style>${componentCss}</style>`
     return template
   }
 

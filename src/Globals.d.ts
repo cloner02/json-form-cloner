@@ -5,6 +5,6 @@ declare module '*.css' {
 }
 
 declare module '*.html' {
-  const value: any
+  const value: string
   export default value
 }
