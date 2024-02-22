@@ -1,11 +1,11 @@
+import { type IBaseProperties } from '../../cbase/type/index'
+
 interface ITypeInput {
-  template: (value: any) => string
+  html: (value: any) => string
 }
 
-class ITextInput implements ITypeInput {
-  template (value: any): string {
-    return `<input value='${value}'></input>`
-  }
+interface IPropertiesInput extends IBaseProperties {
+  typeInput: ITypeInput
 }
 
-export { ITextInput, type ITypeInput }
+export { type ITypeInput, type IPropertiesInput }

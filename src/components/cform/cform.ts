@@ -1,10 +1,7 @@
-import { CBase, type IBaseProperties } from '../cbase/cbase'
+import { CBase } from '../cbase/cbase'
 import style from './../../template/cForm/cform.css'
 import template from './../../template/cForm/cform.html'
-
-interface IPropertiesForm extends IBaseProperties {
-  bodyjson: string
-}
+import { type IPropertiesForm } from './type/index'
 
 export class CForm extends CBase implements IPropertiesForm {
   bodyjson: string
@@ -21,11 +18,6 @@ export class CForm extends CBase implements IPropertiesForm {
   css (): string {
     // eslint-disable-next-line @typescript-eslint/no-base-to-string, @typescript-eslint/restrict-template-expressions
     return `${style}`
-  }
-
-  attributeChangedCallback (name: any, oldValue: any, newValue: any): void {
-    super.attributeChangedCallback(name, oldValue, newValue)
-    console.log('attributeChangedCallback')
   }
 }
 

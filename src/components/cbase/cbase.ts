@@ -1,6 +1,4 @@
-export interface IBaseProperties {
-  value: any
-}
+import { type IBaseProperties } from './type/index'
 
 export abstract class CBase extends HTMLElement implements IBaseProperties {
   value: any

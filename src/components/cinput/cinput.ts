@@ -1,9 +1,5 @@
-import { CBase, type IBaseProperties } from '../cbase/cbase'
-import { type ITypeInput } from './type/index'
-
-interface IPropertiesInput extends IBaseProperties {
-  typeInput: ITypeInput
-}
+import { CBase } from '../cbase/cbase'
+import { type ITypeInput, type IPropertiesInput } from './type/index'
 
 export class CInput extends CBase implements IPropertiesInput {
   typeInput: ITypeInput
@@ -13,27 +9,12 @@ export class CInput extends CBase implements IPropertiesInput {
     this.typeInput = typeInput
   }
 
-  template (): HTMLTemplateElement {
-    const template = document.createElement('template')
-    template.innerHTML = this.typeInput.template(this.value)
-    return template
+  html (): string {
+    return this.typeInput.html(this.value)
   }
 
-  connectedCallback (): void {
-    this.render()
-  }
-
-  adoptedCallback (): void {
-    console.log('adoptedCallback')
-  }
-
-  attributeChangedCallback (name: any, oldValue: any, newValue: any): void {
-    super.attributeChangedCallback(name, oldValue, newValue)
-    console.log('attributeChangedCallback')
-  }
-
-  render (): void {
-    super.render()
+  css (): string {
+    return ''
   }
 }
 
