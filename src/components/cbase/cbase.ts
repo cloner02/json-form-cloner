@@ -1,6 +1,7 @@
 import { type IBaseProperties } from './type/index'
 
 export abstract class CBase extends HTMLElement implements IBaseProperties {
+  [key: string]: any; // Add index signature to allow indexing with a string parameter
   value: any
   static observedAttributes = ['value']
   constructor () {
@@ -24,8 +25,6 @@ export abstract class CBase extends HTMLElement implements IBaseProperties {
     template.innerHTML = `${componentHtml}<style>${componentCss}</style>`
     return template
   }
-
-  [key: string]: any; // Add index signature to allow indexing with a string parameter
 
   applyValues (): void {
     const listProperties: string[] = Object.getOwnPropertyNames(this)

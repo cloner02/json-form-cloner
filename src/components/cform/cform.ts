@@ -2,8 +2,9 @@ import { CBase } from '../cbase/cbase'
 import style from './../../template/cForm/cform.css'
 import template from './../../template/cForm/cform.html'
 import { type IPropertiesForm } from './type/index'
-import { renderJsonBody } from './../../utils/renderJsonBody'
+import { Utils } from '../../decorators/utils'
 
+@Utils()
 export class CForm extends CBase implements IPropertiesForm {
   bodyjson: string
 
@@ -20,8 +21,7 @@ export class CForm extends CBase implements IPropertiesForm {
   attributeChangedCallback (name: any, oldValue: any, newValue: any): void {
     super.attributeChangedCallback(name, oldValue, newValue)
     if (name === 'bodyjson') {
-      console.log('newValue', newValue)
-      renderJsonBody(newValue as string, this.shadowRoot)
+      this.renderBodyjson(newValue)
     }
   }
 

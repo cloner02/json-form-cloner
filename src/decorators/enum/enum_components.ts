@@ -1,4 +1,4 @@
-import { getComponentTextInput } from '../components/cinput/util/index'
+import { getComponentTextInput } from '../../components/cinput/util/index'
 
 const COMPONENT_ENUM = Object.freeze({
   text: getComponentTextInput
