@@ -6,6 +6,5 @@ export default {
   moduleNameMapper: {
     '.+\\.(css|styl|less|sass|scss)$': '<rootDir>/node_modules/jest-css-modules-transform',
     '.+\\.html$': '<rootDir>/node_modules/html-loader'
-  },
-  setupFilesAfterEnv: ['<rootDir>/jest-setup.ts']
+  }
 }
