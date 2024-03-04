@@ -1,4 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
+require('@testing-library/jest-dom')
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { CForm } = require('json-form-cloner')
 
 describe('CBase component', () => {
@@ -20,9 +22,20 @@ describe('CBase component', () => {
                           }
                       }
                      `
-    window.document.body.appendChild(cForm)
+    window.document.body.innerHTML =
+      `<c-form bodyjson='{
+          "name": {
+              "type": "text",
+              "label": "Nombre",
+              "value": "Juan",
+              "required": true
+            }
+          }'
+      ></c-form>`
     await cForm.updateComplete
     const renderedCForm = getShadowRoot(CFORM_TAG)?.innerHTML
+    const input = getByTestId('your-input')
+    const renderCInput = getShadowRoot(CFORM_TAG)?.querySelector('c-input')?.shadowRoot?.innerHTML
     expect(renderedCForm?.indexOf('text')).not.toBe(-1)
   })
 })

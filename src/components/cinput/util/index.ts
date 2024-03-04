@@ -1,6 +1,6 @@
 import { type CBase } from '../../../components/cbase/cbase'
 import { CInput } from '../../../components/cinput/cinput'
-import { ITextInput } from '../../../components/cinput/subcomponents/index'
+import { ITextInput } from '../../../components/cinput/subcomponents/textinput/index'
 import type PropertiesJsonBody from '../../../type/index'
 
 function getComponentTextInput (args: PropertiesJsonBody): CBase {
