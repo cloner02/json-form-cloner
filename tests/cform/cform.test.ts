@@ -12,17 +12,22 @@ describe('CBase component', () => {
     expect(cForm.render()).toMatchSnapshot()
   })
   it('dom renders correctly with the jsonbody property with a input', async () => {
-    const cForm = new CForm()
-    cForm.bodyjson = `{ 
-                        'name': {
-                          'type': 'text',
-                          'value': 'hello world'
-                          }
-                      }
+    const bodyjson = `{
+      "name": {
+        "type": "text",
+        "value": "Juan",
+        "required": true,
+        "label": "Nombre"
+      }
+    }
                      `
-    window.document.body.appendChild(cForm)
-    await cForm.updateComplete
-    const renderedCForm = getShadowRoot(CFORM_TAG)?.innerHTML
-    expect(renderedCForm?.indexOf('text')).not.toBe(-1)
+    const myForm = document.createElement(CFORM_TAG)
+    myForm.setAttribute('bodyjson', String(bodyjson))
+    window.document.body.appendChild(myForm)
+
+    const renderCForm = getShadowRoot(CFORM_TAG)
+    const renderCInput = renderCForm?.querySelector('c-input')?.shadowRoot
+    const value = renderCInput?.querySelector('input')?.getAttribute('value')
+    expect(value).toBe('Juan')
   })
 })
