@@ -21,6 +21,8 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - name: Install packages
         run: npm install
+      - name: Install faker package
+        run: npm install --save-dev @faker-js/faker
       - name: Build the application
         run: npm run build:dev
       - name: Test the application
