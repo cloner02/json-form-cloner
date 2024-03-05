@@ -1,5 +1,5 @@
+import { type PropertiesJsonInput, ComponentTypeEnum } from '../src/type'
 import { faker } from '@faker-js/faker'
-import { type PropertiesJsonInput, ComponentTypeEnum } from './../src/type'
 
 export function createInputTextFake (): PropertiesJsonInput {
   const inputKey = faker.lorem.word()
