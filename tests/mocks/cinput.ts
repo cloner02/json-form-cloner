@@ -1,4 +1,4 @@
-import { type PropertiesJsonInput, ComponentTypeEnum } from '../src/type'
+import { type PropertiesJsonInput, ComponentTypeEnum } from './../../src/type'
 import { faker } from '@faker-js/faker'
 
 export function createInputTextFake (): PropertiesJsonInput {
