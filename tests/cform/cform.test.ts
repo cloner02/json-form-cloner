@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { CForm } = require('json-form-cloner')
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { createInputTextFake } = require('./../mocks/cinput')
+const { createInputTextFake } = require('../mocks/cinput')
 
 describe('CBase component', () => {
   const CFORM_TAG = 'c-form'
