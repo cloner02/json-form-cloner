@@ -1,7 +1,9 @@
-import { type PropertiesJsonInput, ComponentTypeEnum } from './../../src/type'
-import { faker } from '@faker-js/faker'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { PropertiesJsonInput, ComponentTypeEnum } = require('../../src/type')
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { faker } = require('@faker-js/faker')
 
-export function createInputTextFake (): PropertiesJsonInput {
+export function createInputTextFake (): typeof PropertiesJsonInput {
   const inputKey = faker.lorem.word()
   return {
     [inputKey]: {
