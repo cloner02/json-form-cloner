@@ -1,6 +1,6 @@
-import { ElementJsonFormatError, PropertyNotFoundError } from './../exceptions/index'
+// import { ElementJsonFormatError, PropertyNotFoundError } from './../exceptions/index'
 
-export function getPropertyValueFromJson (propertyName: string, json: string): any {
+/* export function getPropertyValueFromJson (propertyName: string, json: string): any {
   const parsedJson: Record<string, any> = JSON.parse(json)
   const keys = Object.keys(parsedJson)
 
@@ -14,10 +14,10 @@ export function getPropertyValueFromJson (propertyName: string, json: string): a
     throw new PropertyNotFoundError(propertyName)
   }
   return infoOfElement[propertyName]
-}
+} */
 
 // eslint-disable-next-line no-extend-native
-String.prototype.getPropertyValueFromJson = function (propertyName: string): any {
+export default String.prototype.getPropertyValueFromJson = function (propertyName: string): any {
   console.log('this', this)
   const parsedJson: Record<string, any> = JSON.parse(this.toString())
   const keys = Object.keys(parsedJson)
