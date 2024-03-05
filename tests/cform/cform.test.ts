@@ -25,6 +25,7 @@ describe('CBase component', () => {
       }
     }
                      `
+    console.log('bodyjson', bodyjson.getPropertyValueFromJson('value'))
     const myForm = document.createElement(CFORM_TAG)
     myForm.setAttribute('bodyjson', String(bodyjson))
     window.document.body.appendChild(myForm)

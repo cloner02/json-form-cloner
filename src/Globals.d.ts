@@ -8,3 +8,8 @@ declare module '*.html' {
   const value: string
   export default value
 }
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+interface String {
+  getPropertyValueFromJson: (propertyName: string) => string
+}
