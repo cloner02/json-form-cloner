@@ -1,8 +1,12 @@
-interface PropertiesJsonBody {
-  type: string
+export const ComponentTypeEnum = Object.freeze({
+  TEXT: 'text'
+})
+
+export interface PropertiesJsonBody {
+  type: typeof ComponentTypeEnum[keyof typeof ComponentTypeEnum]
   label: string
   value: string
   required: boolean
 }
 
-export default PropertiesJsonBody
+export type PropertiesJsonInput = Record<string, PropertiesJsonBody>

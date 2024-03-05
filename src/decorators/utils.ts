@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 import { type CBase } from '../components/cbase/cbase'
-import type PropertiesJsonBody from '../type/index'
+import { type PropertiesJsonBody } from '../type/index'
 import { COMPONENT_ENUM } from './enum/enum_components'
 
 /**

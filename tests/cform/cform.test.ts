@@ -1,5 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { CForm } = require('json-form-cloner')
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { createInputTextFake } = require('./../../mocks/cinput')
 
 describe('CBase component', () => {
   const CFORM_TAG = 'c-form'
@@ -12,6 +14,8 @@ describe('CBase component', () => {
     expect(cForm.render()).toMatchSnapshot()
   })
   it('dom renders correctly with the jsonbody property with a input', async () => {
+    console.log('createInputTextFake', createInputTextFake())
+
     const bodyjson = `{
       "name": {
         "type": "text",
