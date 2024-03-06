@@ -25,7 +25,6 @@ export class CInput extends CBase implements IPropertiesInput {
   }
 
   disconnectedCallback (): void {
-    super.disconnectedCallback()
     this._inputElement.addEventListener('input', (event: Event) => { this.updateValue(event) })
   }
 
