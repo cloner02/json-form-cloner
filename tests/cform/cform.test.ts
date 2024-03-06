@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { CForm } = require('json-form-cloner')
+const { CForm, getPropertyValueFromJson } = require('json-form-cloner')
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { createInputTextFake } = require('../mocks/cinput')
+const { createInputTextFakeToJson } = require('../mocks/cinput')
 
 describe('CBase component', () => {
   const CFORM_TAG = 'c-form'
@@ -13,19 +13,11 @@ describe('CBase component', () => {
 
     expect(cForm.render()).toMatchSnapshot()
   })
-  it('dom renders correctly with the jsonbody property with a input', async () => {
-    console.log('createInputTextFake', createInputTextFake())
+  it('dom renders correctly with the jsonbody property with a input and its value is expected to be set', async () => {
+    const bodyjson = createInputTextFakeToJson()
 
-    const bodyjson = `{
-      "name": {
-        "type": "text",
-        "value": "Juan",
-        "required": true,
-        "label": "Nombre"
-      }
-    }
-                     `
-    console.log('bodyjson', bodyjson.getPropertyValueFromJson('value'))
+    const inputValue = getPropertyValueFromJson('value', bodyjson)
+
     const myForm = document.createElement(CFORM_TAG)
     myForm.setAttribute('bodyjson', String(bodyjson))
     window.document.body.appendChild(myForm)
@@ -33,6 +25,7 @@ describe('CBase component', () => {
     const renderCForm = getShadowRoot(CFORM_TAG)
     const renderCInput = renderCForm?.querySelector('c-input')?.shadowRoot
     const value = renderCInput?.querySelector('input')?.getAttribute('value')
-    expect(value).toBe('Juan')
+
+    expect(value).toBe(inputValue)
   })
 })

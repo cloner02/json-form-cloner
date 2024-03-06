@@ -1,8 +1,7 @@
 import { ElementJsonFormatError, PropertyNotFoundError } from './../exceptions/index'
 
-// eslint-disable-next-line no-extend-native
-export default String.prototype.getPropertyValueFromJson = function (propertyName: string): any {
-  const parsedJson: Record<string, any> = JSON.parse(this.toString())
+export function getPropertyValueFromJson (propertyName: string, json: string): string {
+  const parsedJson: Record<string, any> = JSON.parse(json)
   const keys = Object.keys(parsedJson)
 
   if (keys.length !== 1) {
