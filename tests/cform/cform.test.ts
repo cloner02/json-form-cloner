@@ -1,7 +1,11 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { CForm, getPropertyValueFromJson } = require('json-form-cloner')
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { createInputTextFakeToJson } = require('../mocks/cinput')
+const { createTextInputFakeToJson, createPasswordInputFakeToJson } = require('../mocks/cinput')
+
+afterEach(() => {
+  document.body.innerHTML = ''
+})
 
 describe('CBase component', () => {
   const CFORM_TAG = 'c-form'
@@ -13,13 +17,28 @@ describe('CBase component', () => {
 
     expect(cForm.render()).toMatchSnapshot()
   })
-  it('dom renders correctly with the jsonbody property with a input and its value is expected to be set', async () => {
-    const bodyjson = createInputTextFakeToJson()
+  it('dom renders correctly with the jsonbody property with a input of type TEXT and its value is expected to be set', async () => {
+    const textInputjson = createTextInputFakeToJson()
 
-    const inputValue = getPropertyValueFromJson('value', bodyjson)
+    const inputValue = getPropertyValueFromJson('value', textInputjson)
 
     const myForm = document.createElement(CFORM_TAG)
-    myForm.setAttribute('bodyjson', String(bodyjson))
+    myForm.setAttribute('bodyjson', String(textInputjson))
+    window.document.body.appendChild(myForm)
+
+    const renderCForm = getShadowRoot(CFORM_TAG)
+    const renderCInput = renderCForm?.querySelector('c-input')?.shadowRoot
+    const value = renderCInput?.querySelector('input')?.getAttribute('value')
+
+    expect(value).toBe(inputValue)
+  })
+  it('dom renders correctly with the jsonbody property with a input of type PASSWORD and its value is expected to be set', async () => {
+    const passwordInputjson = createPasswordInputFakeToJson()
+
+    const inputValue = getPropertyValueFromJson('value', passwordInputjson)
+
+    const myForm = document.createElement(CFORM_TAG)
+    myForm.setAttribute('bodyjson', String(passwordInputjson))
     window.document.body.appendChild(myForm)
 
     const renderCForm = getShadowRoot(CFORM_TAG)

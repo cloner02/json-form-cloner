@@ -1,4 +1,4 @@
-import { type ITypeInput } from './../type/index'
+import { type ITypeInput } from '../../type/index'
 
 class ITextInput implements ITypeInput {
   html (value: any): string {
