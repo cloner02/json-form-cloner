@@ -1,7 +1,7 @@
 import { type IBaseProperties } from '../../cbase/type/index'
 
 interface ITypeInput {
-  html: (value: any, id: string, label: string) => string
+  html: (value: any, elementId: string, label: string) => string
 }
 
 interface IPropertiesInput extends IBaseProperties {

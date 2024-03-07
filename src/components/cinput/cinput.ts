@@ -4,15 +4,16 @@ import { type ITypeInput, type IPropertiesInput } from './type/index'
 export class CInput extends CBase implements IPropertiesInput {
   typeInput: ITypeInput
   private _inputElement: HTMLInputElement
-  constructor (value: any, id: string, label: string, typeInput: ITypeInput) {
-    super(value, id, label)
-    this._inputElement = document.createElement('input')
+  constructor (value: any, elementId: string, label: string, typeInput: ITypeInput) {
+    super(value, elementId, label)
+    this._inputElement = null as unknown as HTMLInputElement
     this.typeInput = typeInput
   }
 
   updateValue (event: Event): void {
     const target = event.target as HTMLInputElement
     this.value = target.value
+    console.log('value', this.value)
   }
 
   connectedCallback (): void {
@@ -23,7 +24,7 @@ export class CInput extends CBase implements IPropertiesInput {
   }
 
   html (): string {
-    return this.typeInput.html(this.value, this.id, this.label)
+    return this.typeInput.html(this.value, this.elementId, this.label)
   }
 
   css (): string {

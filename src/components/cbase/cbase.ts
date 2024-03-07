@@ -4,13 +4,13 @@ export abstract class CBase extends HTMLElement implements IBaseProperties {
   [key: string]: any; // Add index signature to allow indexing with a string parameter
   value: any
   label: string
-  id: string
+  elementId: string
   static observedAttributes = ['value']
-  constructor (value: any, id: string, label?: string) {
+  constructor (value: any, elementId: string, label?: string) {
     super()
     this.label = label ?? ''
     this.value = value
-    this.id = id
+    this.elementId = elementId
     this.attachShadow({ mode: 'open' })
   }
 

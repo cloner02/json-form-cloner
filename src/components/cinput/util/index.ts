@@ -15,9 +15,9 @@ function getComponentPasswordInput (args: PropertiesJsonBody): CBase {
 
 function getComponentInput (args: PropertiesJsonBody, typeInput: ITypeInput): CBase {
   const value: string = args.value
-  const id: string = args.id
+  const elementId: string = args.elementId
   const label: string = args.label
-  return new CInput(value, id, label, typeInput)
+  return new CInput(value, elementId, label, typeInput)
 }
 
 export { getComponentTextInput, getComponentPasswordInput }

@@ -7,10 +7,15 @@ import { Utils } from '../../decorators/utils'
 @Utils()
 export class CForm extends CBase implements IPropertiesForm {
   bodyjson: string
+  private _form: HTMLFormElement
+  private _isConnected: boolean = false
 
   static observedAttributes = ['value', 'bodyjson']
-  constructor (value: any, id: string) {
-    super(value, id)
+  constructor (value: any, elementId: string) {
+    super(value, elementId)
+    this._form = null as unknown as HTMLFormElement
+    // this._form = document.createElement('form')
+    // this.shadowRoot?.appendChild(this._form)
     this.bodyjson = '{}'
   }
 
@@ -18,9 +23,16 @@ export class CForm extends CBase implements IPropertiesForm {
     return `${template}`
   }
 
+  connectedCallback (): void {
+    super.connectedCallback()
+    this._form = this.shadowRoot?.querySelector('form') as Element as HTMLFormElement
+    this._isConnected = true
+    this.renderBodyjson(this.bodyjson)
+  }
+
   attributeChangedCallback (name: any, oldValue: any, newValue: any): void {
     super.attributeChangedCallback(name, oldValue, newValue)
-    if (name === 'bodyjson') {
+    if (name === 'bodyjson' && this._isConnected) {
       this.renderBodyjson(newValue)
     }
   }

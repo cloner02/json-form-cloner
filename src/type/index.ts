@@ -4,7 +4,7 @@ export const ComponentTypeEnum = Object.freeze({
 })
 
 export interface PropertiesJsonBody {
-  id: string
+  elementId: string
   type: typeof ComponentTypeEnum[keyof typeof ComponentTypeEnum]
   label: string
   value: string

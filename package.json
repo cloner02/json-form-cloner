@@ -1,6 +1,6 @@
 {
   "name": "json-form-cloner",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "type": "commonjs",
   "description": "Create forms from a property type of Json or with web components",
   "keywords": [
@@ -48,6 +48,7 @@
     "jest-css-modules-transform": "^4.4.2",
     "jest-environment-jsdom": "^29.7.0",
     "jest-environment-jsdom-sixteen": "^2.0.0",
+    "jest-html-loader": "^1.0.0",
     "nodemon": "^3.0.3",
     "prettier": "^3.2.5",
     "raw-loader": "^4.0.2",
