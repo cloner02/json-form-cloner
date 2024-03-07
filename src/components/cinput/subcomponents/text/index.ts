@@ -1,9 +1,12 @@
 import { type ITypeInput } from '../../type/index'
 
-class ITextInput implements ITypeInput {
-  html (value: any): string {
-    return `<input value='${value}'></input>`
+class TextInput implements ITypeInput {
+  html (value: any, id: string, label: string): string {
+    return `
+            <label for='${id}'>${label}</label>
+            <input type='text' id='${id}' value='${value}'></input>
+            `
   }
 }
 
-export { ITextInput }
+export { TextInput }

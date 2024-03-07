@@ -9,8 +9,8 @@ export class CForm extends CBase implements IPropertiesForm {
   bodyjson: string
 
   static observedAttributes = ['value', 'bodyjson']
-  constructor () {
-    super()
+  constructor (value: any, id: string) {
+    super(value, id)
     this.bodyjson = '{}'
   }
 

@@ -3,10 +3,14 @@ import { type IBaseProperties } from './type/index'
 export abstract class CBase extends HTMLElement implements IBaseProperties {
   [key: string]: any; // Add index signature to allow indexing with a string parameter
   value: any
+  label: string
+  id: string
   static observedAttributes = ['value']
-  constructor () {
+  constructor (value: any, id: string, label?: string) {
     super()
-    this.value = ''
+    this.label = label ?? ''
+    this.value = value
+    this.id = id
     this.attachShadow({ mode: 'open' })
   }
 

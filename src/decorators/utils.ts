@@ -41,7 +41,7 @@ export function Utils (): ClassDecorator {
         if (this.bodyJsonParse[key] !== null) {
           const typeOfElement = this.bodyJsonParse[key].type
           const propertiesOfElement = this.bodyJsonParse[key] as PropertiesJsonBody
-
+          propertiesOfElement.id = key
           if (typeOfElement in COMPONENT_ENUM) {
             const keyOfTypeOfElement = typeOfElement as keyof typeof COMPONENT_ENUM
             const component: CBase = COMPONENT_ENUM[keyOfTypeOfElement](propertiesOfElement)

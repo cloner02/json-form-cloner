@@ -1,19 +1,23 @@
 import { type CBase } from '../../../components/cbase/cbase'
 import { CInput } from '../../../components/cinput/cinput'
-import { ITextInput } from '../subcomponents/text/index'
-import { IPasswordInput } from '../subcomponents/password/index'
+import { TextInput } from '../subcomponents/text/index'
+import { PasswordInput } from '../subcomponents/password/index'
 import { type PropertiesJsonBody } from '../../../type/index'
+import { type ITypeInput } from '../type/index'
 
 function getComponentTextInput (args: PropertiesJsonBody): CBase {
-  const value: string = args.value
-  const mytextInput = new ITextInput()
-  return new CInput(value, mytextInput)
+  return getComponentInput(args, new TextInput())
 }
 
 function getComponentPasswordInput (args: PropertiesJsonBody): CBase {
+  return getComponentInput(args, new PasswordInput())
+}
+
+function getComponentInput (args: PropertiesJsonBody, typeInput: ITypeInput): CBase {
   const value: string = args.value
-  const mypasswordInput = new IPasswordInput()
-  return new CInput(value, mypasswordInput)
+  const id: string = args.id
+  const label: string = args.label
+  return new CInput(value, id, label, typeInput)
 }
 
 export { getComponentTextInput, getComponentPasswordInput }

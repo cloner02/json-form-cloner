@@ -1,9 +1,12 @@
 import { type ITypeInput } from '../../type/index'
 
-class IPasswordInput implements ITypeInput {
-  html (value: any): string {
-    return `<input type='password' value='${value}'></input>`
+class PasswordInput implements ITypeInput {
+  html (value: any, id: string, label: string): string {
+    return `
+            <label for='${id}'>${label}</label>
+            <input type='password' id='${id}' value='${value}'></input>
+          `
   }
 }
 
-export { IPasswordInput }
+export { PasswordInput }
