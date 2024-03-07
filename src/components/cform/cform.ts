@@ -14,8 +14,6 @@ export class CForm extends CBase implements IPropertiesForm {
   constructor (value: any, elementId: string) {
     super(value, elementId)
     this._form = null as unknown as HTMLFormElement
-    // this._form = document.createElement('form')
-    // this.shadowRoot?.appendChild(this._form)
     this.bodyjson = '{}'
   }
 
