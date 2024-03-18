@@ -1,5 +1,6 @@
 'use strict';
 const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
     entry: "./src/index.ts",
@@ -28,6 +29,10 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: [".ts", ".js"]
+        extensions: [".ts", ".js"],
+        alias: {
+            "cForm": path.resolve(__dirname, "src/components/cform/cform"),
+            "FormController": path.resolve(__dirname, "src/controller/index")
+          }
   }
 };
