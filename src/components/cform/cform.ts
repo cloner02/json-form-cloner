@@ -3,6 +3,7 @@ import style from './../../template/cForm/cform.css'
 import template from './../../template/cForm/cform.html'
 import { type IPropertiesForm } from './type/index'
 import { Utils } from '../../decorators/utils'
+import FormsCollection from '../../singleton/index'
 
 @Utils()
 export class CForm extends CBase implements IPropertiesForm {
@@ -15,6 +16,7 @@ export class CForm extends CBase implements IPropertiesForm {
     super(value, elementId)
     this._form = null as unknown as HTMLFormElement
     this.bodyjson = '{}'
+    FormsCollection.put(this)
   }
 
   html (): string {
