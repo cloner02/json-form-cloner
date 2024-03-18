@@ -6,12 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>TypeScript Web Component</title>
 </head>
-<script type="module" src="../dist-webpack/bundle.js">
-</script>
-<script type="module">
-  import { CForm } from 'CForm';
-  const cform = new CForm('login');
-  console.log(cform)
+<script src="../dist-webpack/bundle.js"></script>
+<script>
+  const formController = new __.FormController();
+  const cform = new __.CForm();
+  console.log(formController);
 </script>
 <body>
     <c-form id="login" bodyjson='{

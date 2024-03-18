@@ -7,6 +7,11 @@ module.exports = {
     output: {
         path: __dirname + "/dist-webpack",
         filename: "bundle.js",
+        library: {
+            name: '__',
+            type: 'umd',
+          },
+        globalObject: 'this' // make the library compatible with both browser and node
     },
     module: {
         rules: [
@@ -29,10 +34,6 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: [".ts", ".js"],
-        alias: {
-            "cForm": path.resolve(__dirname, "src/components/cform/cform"),
-            "FormController": path.resolve(__dirname, "src/controller/index")
-          }
+        extensions: [".ts", ".js"]
   }
 };
