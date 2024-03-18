@@ -22,6 +22,19 @@
           }
         }'
     ></c-form>
-    <script type="module" src="../dist-webpack/bundle.js"></script>
+    <script type="module" src="../dist-webpack/bundle.js">
+      import { CForm } from '../dist-webpack/bundle.js';
+      const cform = new CForm('login');
+      console.log('hi')
+      window.onload = function () {
+        try {
+          const cform = new CForm('login');
+        } catch (e) {
+          console.log('error', e);
+        }
+
+        console.log('hi');
+      }
+    </script>
 </body>
 </html>

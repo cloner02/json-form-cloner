@@ -2,9 +2,9 @@ import { type CForm } from '../components/cform/cform'
 
 class FormsCollection {
   private static instance: FormsCollection
-  private readonly forms: CForm[]
+  private readonly forms: CForm[] = []
   private constructor () {
-    this.forms = []
+
   }
 
   public static put (form: CForm): void {
@@ -23,7 +23,7 @@ class FormsCollection {
   }
 
   public static getInstance (): FormsCollection {
-    if (FormsCollection.instance === null) {
+    if (FormsCollection.instance === undefined) {
       FormsCollection.instance = new FormsCollection()
     }
     return FormsCollection.instance
