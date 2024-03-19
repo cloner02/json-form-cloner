@@ -8,9 +8,11 @@
 </head>
 <script src="../dist-webpack/bundle.js"></script>
 <script>
-  const formController = new __.FormController();
-  const cform = new __.CForm();
-  console.log(formController);
+  window.onpageshow = function () {
+    const formController = new __.FormController("login");
+    console.log(formController);
+    };
+ 
 </script>
 <body>
     <c-form id="login" bodyjson='{

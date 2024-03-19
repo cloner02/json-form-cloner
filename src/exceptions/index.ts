@@ -9,3 +9,9 @@ export class PropertyNotFoundError extends Error {
     super(`Property ${propertyName} not found in JSON`)
   }
 }
+
+export class EmptyIdException extends Error {
+  constructor () {
+    super('Both id and elementId cannot be empty')
+  }
+}

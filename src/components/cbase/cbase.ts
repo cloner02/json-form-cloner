@@ -1,3 +1,5 @@
+import { valueChangedEvent } from '../../events/index'
+import { EmptyIdException } from '../../exceptions/index'
 import { type IBaseProperties } from './type/index'
 
 export abstract class CBase extends HTMLElement implements IBaseProperties {
@@ -36,6 +38,14 @@ export abstract class CBase extends HTMLElement implements IBaseProperties {
       const attributeValue = this.attributes.getNamedItem(property)?.value
       if (attributeValue !== undefined) { this[property] = attributeValue }
     })
+    /**
+     * Id overwrites elementId if both are present or elementid is undefined
+    */
+    const idPriority = this.id ?? this.elementId
+
+    if (idPriority === undefined) { throw new EmptyIdException() }
+
+    this.id = idPriority
   }
 
   connectedCallback (): void {
@@ -44,12 +54,11 @@ export abstract class CBase extends HTMLElement implements IBaseProperties {
   }
 
   adoptedCallback (): void {
-    console.log('adoptedCallback')
   }
 
   attributeChangedCallback (name: any, oldValue: any, newValue: any): void {
     if (name === 'value') {
-      console.log('attributeChangedCallback value')
+      this.dispatchEvent(valueChangedEvent({}))
     }
   }
 

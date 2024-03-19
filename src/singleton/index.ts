@@ -12,11 +12,12 @@ class FormsCollection {
   }
 
   public static get (id: string): CForm | undefined {
-    return FormsCollection.getInstance().forms.find((form: CForm) => form.elementId === id)
+    console.log('forms', FormsCollection.getInstance().forms)
+    return FormsCollection.getInstance().forms.find((form: CForm) => form.elementId === id || form.id === id)
   }
 
   public static remove (id: string): void {
-    const index = FormsCollection.getInstance().forms.findIndex((form: CForm) => form.elementId === id)
+    const index = FormsCollection.getInstance().forms.findIndex((form: CForm) => form.elementId === id || form.id === id)
     if (index !== -1) {
       FormsCollection.getInstance().forms.splice(index, 1)
     }

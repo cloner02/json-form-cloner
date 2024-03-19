@@ -23,6 +23,14 @@ export class CForm extends CBase implements IPropertiesForm {
     return `${template}`
   }
 
+  values (): void {
+    this._form.childNodes.forEach((element: ChildNode) => {
+      if (element instanceof HTMLInputElement) {
+        console.log('element', element)
+      }
+    })
+  }
+
   connectedCallback (): void {
     super.connectedCallback()
     this._form = this.shadowRoot?.querySelector('form') as Element as HTMLFormElement
