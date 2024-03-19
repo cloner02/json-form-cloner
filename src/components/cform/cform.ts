@@ -25,7 +25,7 @@ export class CForm extends CBase implements IPropertiesForm {
     return `${template}`
   }
 
-  values (): void {
+  setvalues (): void {
     this._form.childNodes.forEach((element: ChildNode) => {
       if (element instanceof CBase) {
         this.value[element.elementId] = element.value
@@ -47,7 +47,7 @@ export class CForm extends CBase implements IPropertiesForm {
     this._form = this.shadowRoot?.querySelector('form') as Element as HTMLFormElement
     this._isConnected = true
     this.renderBodyjson(this.bodyjson)
-    this.values()
+    this.setvalues()
   }
 
   attributeChangedCallback (name: any, oldValue: any, newValue: any): void {
