@@ -58,7 +58,12 @@ export abstract class CBase extends HTMLElement implements IBaseProperties {
 
   attributeChangedCallback (name: any, oldValue: any, newValue: any): void {
     if (name === 'value') {
-      this.dispatchEvent(valueChangedEvent({}))
+      this.dispatchEvent(valueChangedEvent({
+        name,
+        newValue,
+        oldValue,
+        elementId: this.elementId
+      }))
     }
   }
 

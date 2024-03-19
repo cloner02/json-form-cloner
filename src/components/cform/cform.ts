@@ -4,6 +4,7 @@ import template from './../../template/cForm/cform.html'
 import { type IPropertiesForm } from './type/index'
 import { Utils } from '../../decorators/utils'
 import FormsCollection from '../../singleton/index'
+import { VALUECHANGEDEVENT } from '../../constants/index'
 
 @Utils()
 export class CForm extends CBase implements IPropertiesForm {
@@ -24,9 +25,15 @@ export class CForm extends CBase implements IPropertiesForm {
   }
 
   values (): void {
+    console.log('this._form.childNodes', this._form.childNodes)
+
     this._form.childNodes.forEach((element: ChildNode) => {
-      if (element instanceof HTMLInputElement) {
-        console.log('element', element)
+      console.log('element1', element)
+      if (element instanceof CBase) {
+        console.log('element', element.value)
+        element.addEventListener(VALUECHANGEDEVENT, (event: Event) => {
+          console.log('event', event)
+        })
       }
     })
   }
@@ -36,6 +43,7 @@ export class CForm extends CBase implements IPropertiesForm {
     this._form = this.shadowRoot?.querySelector('form') as Element as HTMLFormElement
     this._isConnected = true
     this.renderBodyjson(this.bodyjson)
+    this.values()
   }
 
   attributeChangedCallback (name: any, oldValue: any, newValue: any): void {
