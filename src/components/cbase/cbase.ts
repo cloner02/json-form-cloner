@@ -4,10 +4,30 @@ import { type IBaseProperties } from './type/index'
 
 export abstract class CBase extends HTMLElement implements IBaseProperties {
   [key: string]: any; // Add index signature to allow indexing with a string parameter
-  value: any
   label: string
   elementId: string
+
+  private _value: any
+
+  get value (): any {
+    return this._value
+  }
+
+  set value (newValue: any) {
+    const oldValue = this._value
+    if (oldValue !== newValue) {
+      this._value = newValue
+      this.dispatchEvent(valueChangedEvent({
+        name: 'value',
+        newValue,
+        oldValue,
+        elementId: this.elementId
+      }))
+    }
+  }
+
   static observedAttributes = ['value']
+
   constructor (value: any, elementId: string, label?: string) {
     super()
     this.label = label ?? ''

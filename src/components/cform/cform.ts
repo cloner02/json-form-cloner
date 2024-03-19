@@ -13,8 +13,9 @@ export class CForm extends CBase implements IPropertiesForm {
   private _isConnected: boolean = false
 
   static observedAttributes = ['value', 'bodyjson']
-  constructor (value: any, elementId: string) {
+  constructor (value: object, elementId: string) {
     super(value, elementId)
+    this.value = value ?? {}
     this._form = null as unknown as HTMLFormElement
     this.bodyjson = '{}'
     FormsCollection.put(this)
@@ -25,14 +26,17 @@ export class CForm extends CBase implements IPropertiesForm {
   }
 
   values (): void {
-    console.log('this._form.childNodes', this._form.childNodes)
-
     this._form.childNodes.forEach((element: ChildNode) => {
-      console.log('element1', element)
       if (element instanceof CBase) {
-        console.log('element', element.value)
+        this.value[element.elementId] = element.value
+
         element.addEventListener(VALUECHANGEDEVENT, (event: Event) => {
+          const payload = (event as CustomEvent).detail.payload
+          const elementIdSource = payload.elementId
+          const valueSource = payload.newValue
+          this.value[elementIdSource] = valueSource
           console.log('event', event)
+          console.log('valueForm', this.value)
         })
       }
     })

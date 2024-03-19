@@ -4,6 +4,7 @@ import { type ITypeInput, type IPropertiesInput } from './type/index'
 export class CInput extends CBase implements IPropertiesInput {
   typeInput: ITypeInput
   private _inputElement: HTMLInputElement
+
   constructor (value: any, elementId: string, label: string, typeInput: ITypeInput) {
     super(value, elementId, label)
     this._inputElement = null as unknown as HTMLInputElement
@@ -13,6 +14,7 @@ export class CInput extends CBase implements IPropertiesInput {
   updateValue (event: Event): void {
     const target = event.target as HTMLInputElement
     this.value = target.value
+    console.log('this.value', this.value)
   }
 
   connectedCallback (): void {
