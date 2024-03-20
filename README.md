@@ -4,7 +4,6 @@ Create forms from a Json
 (WIP)
 
 ## Getting started
------------------------
 
 This simple example below creates a form with two inputs, one for entering text and another one for entering a password
 
@@ -17,7 +16,7 @@ This simple example below creates a form with two inputs, one for entering text 
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>TypeScript Web Component</title>
 </head>
-<script src="../dist-webpack/bundle.js"></script>
+<script src="dist-webpack/bundle.js"></script>
 <body>
     <c-form id="login" bodyjson='{
         "username": {
