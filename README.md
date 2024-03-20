@@ -1,33 +1,48 @@
 # json-form
- Create forms from a Json 
+Create forms from a Json 
+
+(WIP)
 
 ## Getting started
+-----------------------
 
-In the project app directory, you can run:
+This simple example below creates a form with two inputs, one for entering text and another one for entering a password
 
-```bash
-
-# install dependencies
-$ npm install
-
-# build for production and create the folders dist-node and dist-webpack
-$ npm run build:prod
-
-# build for development and create the folders dist-node and dist-webpack
-$ npm run build:dev
-
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>TypeScript Web Component</title>
+</head>
+<script src="../dist-webpack/bundle.js"></script>
+<body>
+    <c-form id="login" bodyjson='{
+        "username": {
+            "type": "text",
+            "label": "User Name:",
+            "value": "Juan",
+            "required": true
+          },
+          "password": {
+            "type": "password",
+            "label": "Password :",
+            "value": "MyPassword",
+            "required": true
+          }
+        }'
+    ></c-form>
+</body>
+<script>
+  window.onpageshow = function () {
+    const formController = new __.FormController("login");
+    //get Values from the form identified by the id "login"
+    const values = formController.getValues();
+    console.log(values);
+  };
+</script>
+</html>
 ```
-
-## Do tests
- If you want to do tests locally, you must write these commands in bash the first time, when you are already in the app directory:
- 
- ```bash
- $ cd src
- $ npm link
- $ cd ..
- $ cd tests
- $ npm link json-form-cloner
- ```
-
-Then :
- npm run test
+-----------------------

@@ -12,7 +12,6 @@ class FormsCollection {
   }
 
   public static get (id: string): CForm | undefined {
-    console.log('forms', FormsCollection.getInstance().forms)
     return FormsCollection.getInstance().forms.find((form: CForm) => form.elementId === id || form.id === id)
   }
 

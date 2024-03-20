@@ -35,8 +35,6 @@ export class CForm extends CBase implements IPropertiesForm {
           const elementIdSource = payload.elementId
           const valueSource = payload.newValue
           this.value[elementIdSource] = valueSource
-          console.log('event', event)
-          console.log('valueForm', this.value)
         })
       }
     })

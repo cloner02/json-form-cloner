@@ -15,3 +15,9 @@ export class EmptyIdException extends Error {
     super('Both id and elementId cannot be empty')
   }
 }
+
+export class FormNotFoundException extends Error {
+  constructor () {
+    super('Form not found')
+  }
+}

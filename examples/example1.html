@@ -7,13 +7,6 @@
   <title>TypeScript Web Component</title>
 </head>
 <script src="../dist-webpack/bundle.js"></script>
-<script>
-  window.onpageshow = function () {
-    const formController = new __.FormController("login");
-    console.log(formController);
-    };
- 
-</script>
 <body>
     <c-form id="login" bodyjson='{
         "username": {
@@ -25,10 +18,18 @@
           "password": {
             "type": "password",
             "label": "Password :",
-            "value": "Juan",
+            "value": "MyPassword",
             "required": true
           }
         }'
     ></c-form>
 </body>
+<script>
+  window.onpageshow = function () {
+    const formController = new __.FormController("login");
+    //get Values from the form identified by the id "login"
+    const values = formController.getValues();
+    console.log(values);
+  };
+</script>
 </html>

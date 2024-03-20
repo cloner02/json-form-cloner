@@ -1,4 +1,5 @@
 import { type CForm } from '../components/cform/cform'
+import { FormNotFoundException } from '../exceptions/index'
 import FormsCollection from '../singleton/index'
 
 export class FormController {
@@ -6,5 +7,14 @@ export class FormController {
 
   constructor (nameForm: string) {
     this.formsCollection = FormsCollection.get(nameForm)
+  }
+
+  getValues (): object {
+    return this.formsCollection?.value
+  }
+
+  setValues (values: object): void {
+    if (this.formsCollection === undefined) { throw new FormNotFoundException() }
+    this.formsCollection.value = values ?? {}
   }
 }

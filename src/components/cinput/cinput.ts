@@ -14,7 +14,6 @@ export class CInput extends CBase implements IPropertiesInput {
   updateValue (event: Event): void {
     const target = event.target as HTMLInputElement
     this.value = target.value
-    console.log('this.value', this.value)
   }
 
   connectedCallback (): void {
