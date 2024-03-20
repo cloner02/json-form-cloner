@@ -29,7 +29,10 @@
     const formController = new __.FormController("login");
     //get Values from the form identified by the id "login"
     const values = formController.getValues();
-    console.log(values);
+    //edit the values of the form
+    values.username = "Carlos";
+    formController.setValues(values);
+    console.log(formController.getValues());
   };
 </script>
 </html>
