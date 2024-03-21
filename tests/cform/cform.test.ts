@@ -23,6 +23,7 @@ describe('CBase component', () => {
     const inputValue = getPropertyValueFromJson('value', textInputjson)
 
     const myForm = document.createElement(CFORM_TAG)
+    myForm.setAttribute('id', 'form1')
     myForm.setAttribute('bodyjson', String(textInputjson))
     window.document.body.appendChild(myForm)
 
@@ -38,6 +39,7 @@ describe('CBase component', () => {
     const inputValue = getPropertyValueFromJson('value', passwordInputjson)
 
     const myForm = document.createElement(CFORM_TAG)
+    myForm.setAttribute('id', 'form2')
     myForm.setAttribute('bodyjson', String(passwordInputjson))
     window.document.body.appendChild(myForm)
 

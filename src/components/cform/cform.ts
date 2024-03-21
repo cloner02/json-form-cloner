@@ -13,6 +13,7 @@ export class CForm extends CBase implements IPropertiesForm {
   private _isConnected: boolean = false
 
   static observedAttributes = ['value', 'bodyjson']
+
   constructor (value: object, elementId: string) {
     super(value, elementId)
     this.value = value ?? {}
@@ -25,7 +26,17 @@ export class CForm extends CBase implements IPropertiesForm {
     return `${template}`
   }
 
-  setvalues (): void {
+  setValuesToChildren (): void {
+    this._form?.childNodes?.forEach((element: ChildNode) => {
+      if (element instanceof CBase) {
+        if (element.value !== String(this.value[element.elementId])) {
+          element.value = this.value[element.elementId]
+        }
+      }
+    })
+  }
+
+  getValuesFromChildren (): void {
     this._form.childNodes.forEach((element: ChildNode) => {
       if (element instanceof CBase) {
         this.value[element.elementId] = element.value
@@ -45,12 +56,22 @@ export class CForm extends CBase implements IPropertiesForm {
     this._form = this.shadowRoot?.querySelector('form') as Element as HTMLFormElement
     this._isConnected = true
     this.renderBodyjson(this.bodyjson)
-    this.setvalues()
+    this.getValuesFromChildren()
   }
 
   attributeChangedCallback (name: any, oldValue: any, newValue: any): void {
     super.attributeChangedCallback(name, oldValue, newValue)
     if (name === 'bodyjson' && this._isConnected) {
+      this.renderBodyjson(newValue)
+    }
+  }
+
+  async propertyChangedCallback (name: any, oldValue: any, newValue: any): Promise<void> {
+    await super.propertyChangedCallback(name, oldValue, newValue)
+    if (name === 'value') {
+      this.setValuesToChildren()
+    }
+    if (name === 'bodyjson') {
       this.renderBodyjson(newValue)
     }
   }

@@ -23,6 +23,13 @@ export class CInput extends CBase implements IPropertiesInput {
     this._inputElement.addEventListener('input', (event: Event) => { this.updateValue(event) })
   }
 
+  async propertyChangedCallback (name: string, oldValue: any, newValue: any): Promise<void> {
+    await super.propertyChangedCallback(name, oldValue, newValue)
+    if (name === 'value') {
+      this._inputElement.value = newValue
+    }
+  }
+
   html (): string {
     return this.typeInput.html(this.value, this.elementId, this.label)
   }

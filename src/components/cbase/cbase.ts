@@ -7,7 +7,7 @@ export abstract class CBase extends HTMLElement implements IBaseProperties {
   label: string
   elementId: string
 
-  private _value: any
+  protected _value: any
 
   get value (): any {
     return this._value
@@ -17,16 +17,14 @@ export abstract class CBase extends HTMLElement implements IBaseProperties {
     const oldValue = this._value
     if (oldValue !== newValue) {
       this._value = newValue
-      this.dispatchEvent(valueChangedEvent({
-        name: 'value',
-        newValue,
-        oldValue,
-        elementId: this.elementId
-      }))
+      console.log('value', newValue)
+      void this.propertyChangedCallback('value', oldValue, newValue)
     }
   }
 
   static observedAttributes = ['value']
+  private readonly connectedPromise: Promise<void> | undefined
+  private resolveConnectedPromise!: () => void
 
   constructor (value: any, elementId: string, label?: string) {
     super()
@@ -34,6 +32,9 @@ export abstract class CBase extends HTMLElement implements IBaseProperties {
     this.value = value
     this.elementId = elementId
     this.attachShadow({ mode: 'open' })
+    this.connectedPromise = new Promise<void>((resolve) => {
+      this.resolveConnectedPromise = resolve
+    })
   }
 
   html (): string {
@@ -52,7 +53,7 @@ export abstract class CBase extends HTMLElement implements IBaseProperties {
     return template
   }
 
-  applyValues (): void {
+  applyAttributesToProperties (): void {
     const listProperties: string[] = Object.getOwnPropertyNames(this)
     listProperties.forEach((property: string) => {
       const attributeValue = this.attributes.getNamedItem(property)?.value
@@ -61,22 +62,36 @@ export abstract class CBase extends HTMLElement implements IBaseProperties {
     /**
      * Id overwrites elementId if both are present or elementid is undefined
     */
-    const idPriority = this.id ?? this.elementId
+    const idPriority = (this.id !== undefined && this.id.length > 0) ? this.id : this.elementId
 
     if (idPriority === undefined) { throw new EmptyIdException() }
 
     this.id = idPriority
+    this.elementId = idPriority
   }
 
   connectedCallback (): void {
-    this.applyValues()
+    this.applyAttributesToProperties()
     this.render()
+    this.resolveConnectedPromise()
   }
 
   adoptedCallback (): void {
   }
 
   attributeChangedCallback (name: any, oldValue: any, newValue: any): void {
+    if (name === 'value') {
+      this.dispatchEvent(valueChangedEvent({
+        name,
+        newValue,
+        oldValue,
+        elementId: this.elementId
+      }))
+    }
+  }
+
+  async propertyChangedCallback (name: any, oldValue: any, newValue: any): Promise<void> {
+    await this.connectedPromise
     if (name === 'value') {
       this.dispatchEvent(valueChangedEvent({
         name,
