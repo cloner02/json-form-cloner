@@ -35,12 +35,17 @@ This simple example below creates a form with two inputs, one for entering text 
     ></c-form>
 </body>
 <script>
-  window.onpageshow = function () {
-    const formController = new __.FormController("login");
-    //get Values from the form identified by the id "login"
-    const values = formController.getValues();
-    console.log(values);
-  };
+   const formController = new __.FormController("login");
+   //get Values from the form identified by the id "login"
+   let values = Object(formController.getValues());
+   console.log(values);
+   //edit the values of the form called login in 5 seconds for you can see the changes. The username value will change of "Juan" to "Carlos"
+   setTimeout(function() {
+    values.username = "Carlos";
+    formController.setValues(values);
+    // get the values of the form after the edit
+    console.log(formController.getValues());
+  }, 5000);
 </script>
 </html>
 ```

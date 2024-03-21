@@ -15,6 +15,6 @@ export class FormController {
 
   setValues (values: object): void {
     if (this.formsCollection === undefined) { throw new FormNotFoundException() }
-    this.formsCollection.value = values ?? {}
+    this.formsCollection.value = JSON.parse(JSON.stringify(values)) ?? {}
   }
 }

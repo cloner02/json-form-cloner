@@ -17,7 +17,6 @@ export abstract class CBase extends HTMLElement implements IBaseProperties {
     const oldValue = this._value
     if (oldValue !== newValue) {
       this._value = newValue
-      console.log('value', newValue)
       void this.propertyChangedCallback('value', oldValue, newValue)
     }
   }
