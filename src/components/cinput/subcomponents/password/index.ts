@@ -1,4 +1,4 @@
-import { type ITypeInput } from '../../type/index'
+import { type IRules, type ITypeInput } from '../../type/index'
 
 class PasswordInput implements ITypeInput {
   html (value: any, id: string, label: string): string {
@@ -7,8 +7,10 @@ class PasswordInput implements ITypeInput {
           `
   }
 
-  defaultRule (): void {
-
+  defaultRule (): IRules {
+    return {
+      pattern: ''
+    }
   }
 }
 
