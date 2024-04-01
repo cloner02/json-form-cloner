@@ -41,8 +41,8 @@ export class CInput extends CBase implements IPropertiesInput {
 
   html (): string {
     const propsRules = Object.entries(this.typeInput.rules)
-      .filter(([keyRule, valueRule]) => valueRule !== null && keyRule !== '')
-      .map(([keyRule, valueRule]) => `${keyRule}=${valueRule}`)
+      .filter(([ruleKey, ruleValue]) => ruleValue !== null && ruleKey !== '')
+      .map(([ruleKey, ruleValue]) => `${ruleKey}=${ruleValue}`)
       .join(' ')
     return `
     <div>
