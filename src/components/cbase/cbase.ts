@@ -111,7 +111,6 @@ export abstract class CBase extends HTMLElement implements IBaseProperties {
   }
 
   showValidationMessage (message: string): void {
-    console.log('showValidationMessage')
     const msgElement = this.shadowRoot?.querySelector(`#${PREFIXMESSAGE}${this.elementId}`)
     if (msgElement !== undefined && msgElement !== null) {
       msgElement.innerHTML = (this.isValidate()) ? message : ''
