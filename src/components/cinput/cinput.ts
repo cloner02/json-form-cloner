@@ -47,7 +47,7 @@ export class CInput extends CBase implements IPropertiesInput {
     return `
     <div>
       <label for='${this.elementId}'>${this.label}</label>
-      ${this.typeInput.html(this.value, this.elementId, this.label, propsRules)}
+      <input placeholder="${this.label}" type='${this.typeInput.type}' id='${this.elementId}' value='${this.value}' ${propsRules}></input>
       <span id="${PREFIXMESSAGE}${this.elementId}"></span>
     </div>
   `

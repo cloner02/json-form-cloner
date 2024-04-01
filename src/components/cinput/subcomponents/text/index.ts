@@ -1,17 +1,11 @@
 import { type IRules, type ITypeInput } from '../../type/index'
 
-class TextInput implements ITypeInput, IRules {
+class TextInput implements ITypeInput {
   rules: IRules = {}
-  conditional?: (value: string) => boolean
+  type: string = 'text'
 
   constructor (rules?: IRules) {
     this.rules = rules ?? {}
-  }
-
-  html (value: any, id: string, label: string, propsRules: string): string {
-    return `
-            <input placeholder="${label}" type='text' id='${id}' value='${value}' ${propsRules}></input>
-            `
   }
 }
 
