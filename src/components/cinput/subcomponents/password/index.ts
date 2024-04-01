@@ -6,6 +6,10 @@ class PasswordInput implements ITypeInput {
             <input type='password' id='${id}' value='${value}'></input>
           `
   }
+
+  defaultRule (): void {
+
+  }
 }
 
 export { PasswordInput }

@@ -2,6 +2,7 @@ import { type IBaseProperties } from '../../cbase/type/index'
 
 interface ITypeInput {
   html: (value: any, elementId: string, label: string) => string
+  defaultRule: () => void
 }
 
 interface IPropertiesInput extends IBaseProperties {
@@ -10,6 +11,15 @@ interface IPropertiesInput extends IBaseProperties {
   htmlwrapper: () => string
   inputEvent: () => void
   onBlurEvent: () => void
+  rules?: IRules
 }
 
-export { type ITypeInput, type IPropertiesInput }
+interface IRules {
+  maximum: number
+  minimum: number
+  minLength: number
+  maxLength: number
+  pattern: string
+}
+
+export { type ITypeInput, type IPropertiesInput, type IRules }

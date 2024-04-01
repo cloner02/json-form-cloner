@@ -6,6 +6,10 @@ class TextInput implements ITypeInput {
             <input type='text' id='${id}' value='${value}'></input>
             `
   }
+
+  defaultRule (): void {
+
+  }
 }
 
 export { TextInput }

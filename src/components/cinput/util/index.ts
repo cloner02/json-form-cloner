@@ -19,8 +19,8 @@ function getComponentEmailInput (args: PropertiesJsonBody): CBase {
 }
 
 function getComponentInput (args: PropertiesJsonBody, typeInput: ITypeInput): CBase {
-  const { value, elementId, label } = args
-  return new CInput(value, elementId, label, typeInput)
+  const { value, elementId, label, rules } = args
+  return new CInput(value, elementId, label, typeInput, rules)
 }
 
 export { getComponentTextInput, getComponentPasswordInput, getComponentEmailInput }

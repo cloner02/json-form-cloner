@@ -6,6 +6,10 @@ class EmailInput implements ITypeInput {
             <input type='email' id='${id}' value='${value}'></input>
           `
   }
+
+  defaultRule (): void {
+
+  }
 }
 
 export { EmailInput }

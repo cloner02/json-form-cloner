@@ -1,13 +1,15 @@
 import { PREFIXMESSAGE } from '../../constants/index'
 import { CBase } from '../cbase/cbase'
-import { type ITypeInput, type IPropertiesInput } from './type/index'
+import { type ITypeInput, type IPropertiesInput, type IRules } from './type/index'
 
 export class CInput extends CBase implements IPropertiesInput {
   typeInput: ITypeInput
+  rules?: IRules
   private _inputElement: HTMLInputElement
 
-  constructor (value: any, elementId: string, label: string, typeInput: ITypeInput) {
+  constructor (value: any, elementId: string, label: string, typeInput: ITypeInput, rules?: IRules) {
     super(value, elementId, label)
+    this.rules = rules
     this._inputElement = null as unknown as HTMLInputElement
     this.typeInput = typeInput
   }
@@ -22,9 +24,7 @@ export class CInput extends CBase implements IPropertiesInput {
   }
 
   onBlurEvent (): void {
-    this._inputElement.addEventListener('blur', (event: FocusEvent) => {
-      super.showValidationMessage('event')
-    })
+    this._inputElement.addEventListener('blur', super.showValidationMessage.bind(this, 'event'))
   }
 
   connectedCallback (): void {
