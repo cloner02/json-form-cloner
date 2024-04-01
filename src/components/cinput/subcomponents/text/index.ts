@@ -1,20 +1,16 @@
 import { type IRules, type ITypeInput } from '../../type/index'
 
 class TextInput implements ITypeInput, IRules {
-  minlength?: number
-  maxlength?: number
-  pattern?: string
+  rules: IRules = {}
   conditional?: (value: string) => boolean
 
   constructor (rules?: IRules) {
-    this.pattern = rules?.pattern
-    this.minlength = rules?.minlength
-    this.maxlength = rules?.maxlength
+    this.rules = rules ?? {}
   }
 
-  html (value: any, id: string, label: string): string {
+  html (value: any, id: string, label: string, propsRules: string): string {
     return `
-            <input type='text' id='${id}' value='${value}'></input>
+            <input placeholder="${label}" type='text' id='${id}' value='${value}' ${propsRules}></input>
             `
   }
 }

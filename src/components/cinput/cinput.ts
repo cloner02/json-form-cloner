@@ -39,18 +39,18 @@ export class CInput extends CBase implements IPropertiesInput {
     }
   }
 
-  htmlwrapper (): string {
-    return `
-      <div>
-        <label for='${this.elementId}'>${this.label}</label>
-        ${this.typeInput.html(this.value, this.elementId, this.label)}
-        <span id="${PREFIXMESSAGE}${this.elementId}"></span>
-      </div>
-    `
-  }
-
   html (): string {
-    return this.htmlwrapper()
+    const propsRules = Object.entries(this.typeInput.rules)
+      .filter(([keyRule, valueRule]) => valueRule !== null && keyRule !== '')
+      .map(([keyRule, valueRule]) => `${keyRule}=${valueRule}`)
+      .join(' ')
+    return `
+    <div>
+      <label for='${this.elementId}'>${this.label}</label>
+      ${this.typeInput.html(this.value, this.elementId, this.label, propsRules)}
+      <span id="${PREFIXMESSAGE}${this.elementId}"></span>
+    </div>
+  `
   }
 
   css (): string {
