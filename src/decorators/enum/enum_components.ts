@@ -1,8 +1,9 @@
-import { getComponentTextInput, getComponentPasswordInput } from '../../components/cinput/util/index'
+import { getComponentTextInput, getComponentPasswordInput, getComponentEmailInput } from '../../components/cinput/util/index'
 
 const COMPONENT_ENUM = Object.freeze({
   text: getComponentTextInput,
-  password: getComponentPasswordInput
+  password: getComponentPasswordInput,
+  email: getComponentEmailInput
 })
 
 export { COMPONENT_ENUM }

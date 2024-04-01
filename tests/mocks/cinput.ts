@@ -27,5 +27,18 @@ export function createPasswordInputFake (): typeof PropertiesJsonInput {
   }
 }
 
+export function createEmailInputFake (): typeof PropertiesJsonInput {
+  const inputKey = faker.lorem.word()
+  return {
+    [inputKey]: {
+      type: ComponentTypeEnum.EMAIL,
+      label: faker.lorem.word(),
+      value: faker.internet.email(),
+      required: faker.datatype.boolean()
+    }
+  }
+}
+
 export function createTextInputFakeToJson (): string { return JSON.stringify(createTextInputFake()) }
 export function createPasswordInputFakeToJson (): string { return JSON.stringify(createPasswordInputFake()) }
+export function createEmailInputFakeToJson (): string { return JSON.stringify(createEmailInputFake()) }

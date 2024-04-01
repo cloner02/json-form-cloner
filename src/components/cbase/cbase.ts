@@ -1,3 +1,4 @@
+import { PREFIXMESSAGE } from '../../constants/index'
 import { valueChangedEvent } from '../../events/index'
 import { EmptyIdException } from '../../exceptions/index'
 import { type IBaseProperties } from './type/index'
@@ -103,5 +104,17 @@ export abstract class CBase extends HTMLElement implements IBaseProperties {
 
   render (): void {
     this.shadowRoot?.append(document.importNode(this.template().content, true))
+  }
+
+  isValidate (): boolean {
+    return true
+  }
+
+  showValidationMessage (message: string): void {
+    console.log('showValidationMessage')
+    const msgElement = this.shadowRoot?.querySelector(`#${PREFIXMESSAGE}${this.elementId}`)
+    if (msgElement !== undefined && msgElement !== null) {
+      msgElement.innerHTML = (this.isValidate()) ? message : ''
+    }
   }
 }

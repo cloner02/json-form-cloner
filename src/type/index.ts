@@ -1,6 +1,7 @@
 export const ComponentTypeEnum = Object.freeze({
   TEXT: 'text',
-  PASSWORD: 'password'
+  PASSWORD: 'password',
+  EMAIL: 'email'
 })
 
 export interface PropertiesJsonBody {

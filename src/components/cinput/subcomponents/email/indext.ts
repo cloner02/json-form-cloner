@@ -1,11 +1,11 @@
 import { type ITypeInput } from '../../type/index'
 
-class PasswordInput implements ITypeInput {
+class EmailInput implements ITypeInput {
   html (value: any, id: string, label: string): string {
     return `
-            <input type='password' id='${id}' value='${value}'></input>
+            <input type='email' id='${id}' value='${value}'></input>
           `
   }
 }
 
-export { PasswordInput }
+export { EmailInput }
