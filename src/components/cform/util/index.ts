@@ -3,8 +3,8 @@ import { CButton } from '../../../components/cbutton/cbutton'
 import { type PropertiesJsonBody } from '../../../type/index'
 
 function getComponentButton (args: PropertiesJsonBody): CBase {
-  const { elementId, label } = args
-  return new CButton(elementId, label)
+  const { value, elementId } = args
+  return new CButton(value, elementId)
 }
 
 export { getComponentButton }

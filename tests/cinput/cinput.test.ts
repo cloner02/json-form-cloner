@@ -1,5 +1,6 @@
-import { CFORM_TAG, CINPUT_TAG } from '../../src/constants'
 import { createTextInputFakeToJson, createPasswordInputFakeToJson, createEmailInputFakeToJson } from '../mocks/cinput'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { CFORM_TAG, CINPUT_TAG } = require('../../src/constants')
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { getPropertyValueFromJson } = require('json-form-cloner')
 

@@ -10,7 +10,7 @@ export class CInput extends CBase implements IPropertiesInput {
     super(value, elementId, label)
     this._inputElement = null as unknown as HTMLInputElement
     this.typeInput = typeInput
-    this.setAttribute('slot', ELEMENT_SLOT)
+    this.setAttribute('slot', ELEMENT_SLOT as string)
   }
 
   updateValue (event: Event): void {

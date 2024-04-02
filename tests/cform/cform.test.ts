@@ -1,4 +1,5 @@
-import { CFORM_TAG } from '../../src/constants'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { CFORM_TAG } = require('../../src/constants')
 
 afterEach(() => {
   document.body.innerHTML = ''

@@ -39,17 +39,6 @@ export function createEmailInputFake (): typeof PropertiesJsonInput {
   }
 }
 
-export function createButtonFake (): typeof PropertiesJsonInput {
-  const inputKey = faker.lorem.word()
-  return {
-    [inputKey]: {
-      type: ComponentTypeEnum.BUTTON,
-      label: faker.lorem.word()
-    }
-  }
-}
-
 export function createTextInputFakeToJson (): string { return JSON.stringify(createTextInputFake()) }
 export function createPasswordInputFakeToJson (): string { return JSON.stringify(createPasswordInputFake()) }
 export function createEmailInputFakeToJson (): string { return JSON.stringify(createEmailInputFake()) }
-export function createButtonFakeToJson (): string { return JSON.stringify(createButtonFake()) }

@@ -1,5 +1,6 @@
-import { CBUTTON_TAG, CFORM_TAG } from '../../src/constants'
-import { createButtonFakeToJson } from '../mocks/cinput'
+import { createButtonFakeToJson } from '../mocks/cbutton'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { CBUTTON_TAG, CFORM_TAG } = require('../../src/constants')
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { getPropertyValueFromJson } = require('json-form-cloner')
 
@@ -11,7 +12,7 @@ describe('CButton component', () => {
   it('dom renders correctly with the jsonbody property with a button', async () => {
     const buttonjson = createButtonFakeToJson()
 
-    const buttonLabel = getPropertyValueFromJson('label', buttonjson)
+    const buttonName = getPropertyValueFromJson('value', buttonjson)
 
     const myForm = document.createElement(CFORM_TAG)
     myForm.setAttribute('id', 'form1')
@@ -22,6 +23,6 @@ describe('CButton component', () => {
     const renderCButton = renderCForm?.querySelector(CBUTTON_TAG)?.shadowRoot
     const label = renderCButton?.querySelector('button')?.textContent
 
-    expect(label).toBe(buttonLabel)
+    expect(label).toBe(buttonName)
   })
 })
