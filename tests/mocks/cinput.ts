@@ -1,9 +1,9 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { PropertiesJsonInput, ComponentTypeEnum } = require('../../src/type')
+const { InputJsonPropertiesMap, ComponentTypeEnum } = require('../../src/type')
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { faker } = require('@faker-js/faker')
 
-export function createTextInputFake (): typeof PropertiesJsonInput {
+export function createTextInputFake (): typeof InputJsonPropertiesMap {
   const inputKey = faker.lorem.word()
   return {
     [inputKey]: {
@@ -15,7 +15,7 @@ export function createTextInputFake (): typeof PropertiesJsonInput {
   }
 }
 
-export function createPasswordInputFake (): typeof PropertiesJsonInput {
+export function createPasswordInputFake (): typeof InputJsonPropertiesMap {
   const inputKey = faker.lorem.word()
   return {
     [inputKey]: {
@@ -27,7 +27,7 @@ export function createPasswordInputFake (): typeof PropertiesJsonInput {
   }
 }
 
-export function createEmailInputFake (): typeof PropertiesJsonInput {
+export function createEmailInputFake (): typeof InputJsonPropertiesMap {
   const inputKey = faker.lorem.word()
   return {
     [inputKey]: {

@@ -1,4 +1,4 @@
-import { getComponentButton } from '../../components/cform/util/index'
+import { getComponentButton } from '../../components/cbutton/util/index'
 import { getComponentTextInput, getComponentPasswordInput, getComponentEmailInput } from '../../components/cinput/util/index'
 
 const COMPONENT_ENUM = Object.freeze({

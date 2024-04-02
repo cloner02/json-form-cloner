@@ -1,3 +1,4 @@
+import { type IBaseProperties } from '../components/cbase/type/index'
 import { type IRules } from '../components/cinput/type/index'
 
 export const ComponentTypeEnum = Object.freeze({
@@ -7,13 +8,17 @@ export const ComponentTypeEnum = Object.freeze({
   BUTTON: 'button'
 })
 
-export interface PropertiesJsonBody {
-  elementId: string
-  type: typeof ComponentTypeEnum[keyof typeof ComponentTypeEnum]
-  label: string
-  value: string
+export interface InputJsonProperties {
   required: boolean
   rules?: IRules
 }
 
-export type PropertiesJsonInput = Record<string, PropertiesJsonBody>
+export interface InputJsonPropertiesWithBaseProperties extends IBaseProperties, InputJsonProperties {
+}
+
+export interface BodyJsonProperties extends IBaseProperties, InputJsonProperties {
+  type: typeof ComponentTypeEnum[keyof typeof ComponentTypeEnum]
+}
+
+export type InputJsonPropertiesMap = Record<string, InputJsonPropertiesWithBaseProperties>
+export type ButtonJsonPropertiesMap = Record<string, IBaseProperties>

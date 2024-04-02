@@ -1,10 +1,10 @@
 import { type CBase } from '../../../components/cbase/cbase'
 import { CButton } from '../../../components/cbutton/cbutton'
-import { type PropertiesJsonBody } from '../../../type/index'
+import { type IBaseProperties } from '../../cbase/type/index'
 
-function getComponentButton (args: PropertiesJsonBody): CBase {
+function getComponentButton (args: IBaseProperties): CBase {
   const { value, elementId } = args
-  return new CButton(value, elementId)
+  return new CButton(value as string, elementId.toString())
 }
 
 export { getComponentButton }

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 import { type CBase } from '../components/cbase/cbase'
-import { type PropertiesJsonBody } from '../type/index'
+import { type BodyJsonProperties } from '../type/index'
 import { COMPONENT_ENUM } from './enum/enum_components'
 
 /**
@@ -41,7 +41,7 @@ export function Utils (): ClassDecorator {
       for (const key in this.bodyJsonParse) {
         if (this.bodyJsonParse[key] !== null) {
           const typeOfElement = this.bodyJsonParse[key].type
-          const propertiesOfElement = this.bodyJsonParse[key] as PropertiesJsonBody
+          const propertiesOfElement = this.bodyJsonParse[key] as BodyJsonProperties
           propertiesOfElement.elementId = key
           if (typeOfElement in COMPONENT_ENUM) {
             const keyOfTypeOfElement = typeOfElement as keyof typeof COMPONENT_ENUM
