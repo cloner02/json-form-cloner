@@ -3,7 +3,8 @@ import { type IRules } from '../components/cinput/type/index'
 export const ComponentTypeEnum = Object.freeze({
   TEXT: 'text',
   PASSWORD: 'password',
-  EMAIL: 'email'
+  EMAIL: 'email',
+  BUTTON: 'button'
 })
 
 export interface PropertiesJsonBody {

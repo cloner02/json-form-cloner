@@ -1,4 +1,4 @@
-import { PREFIXMESSAGE } from '../../constants/index'
+import { ELEMENT_SLOT, PREFIXMESSAGE } from '../../constants/index'
 import { CBase } from '../cbase/cbase'
 import { type ITypeInput, type IPropertiesInput } from './type/index'
 
@@ -10,7 +10,7 @@ export class CInput extends CBase implements IPropertiesInput {
     super(value, elementId, label)
     this._inputElement = null as unknown as HTMLInputElement
     this.typeInput = typeInput
-    this.setAttribute('slot', 'element')
+    this.setAttribute('slot', ELEMENT_SLOT)
   }
 
   updateValue (event: Event): void {

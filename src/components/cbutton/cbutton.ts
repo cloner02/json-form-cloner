@@ -1,11 +1,13 @@
+import { ELEMENT_SLOT } from '../../constants/index'
 import { CBase } from '../cbase/cbase'
 
-class CButton extends CBase {
+export class CButton extends CBase {
   private _buttonElement: HTMLButtonElement
 
   constructor (elementId: string, label: string) {
-    super(elementId, label)
+    super(null, elementId, label)
     this._buttonElement = null as unknown as HTMLButtonElement
+    this.setAttribute('slot', ELEMENT_SLOT)
   }
 
   clickEvent (): void {
@@ -20,7 +22,7 @@ class CButton extends CBase {
   html (): string {
     return `
     <div>
-      <button id='${this.elementId}'>${this.label}</button>
+      <button type='button' id='${this.elementId}'>${this.label}</button>
     </div>
   `
   }

@@ -1,10 +1,10 @@
-import { CFORM_TAG } from '../constants/index'
+import { CFORM_TAG } from '../../src/constants'
 
 afterEach(() => {
   document.body.innerHTML = ''
 })
 
-describe('CFprm component', () => {
+describe('CForm component', () => {
   const getShadowRoot = (tagName: string): ShadowRoot | null => {
     return document.body.getElementsByTagName(tagName)[0].shadowRoot
   }

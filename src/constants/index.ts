@@ -1,2 +1,6 @@
 export const VALUECHANGEDEVENT = 'valueChangedEvent'
 export const PREFIXMESSAGE = 'msg_'
+export const ELEMENT_SLOT = 'element'
+export const CFORM_TAG = 'c-form'
+export const CINPUT_TAG = 'c-input'
+export const CBUTTON_TAG = 'c-button'

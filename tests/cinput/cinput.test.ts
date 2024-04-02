@@ -1,4 +1,4 @@
-import { CFORM_TAG } from '../constants/index'
+import { CFORM_TAG, CINPUT_TAG } from '../../src/constants'
 import { createTextInputFakeToJson, createPasswordInputFakeToJson, createEmailInputFakeToJson } from '../mocks/cinput'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { getPropertyValueFromJson } = require('json-form-cloner')
@@ -8,9 +8,6 @@ afterEach(() => {
 })
 
 describe('CInput component', () => {
-  const getShadowRoot = (tagName: string): ShadowRoot | null => {
-    return document.body.getElementsByTagName(tagName)[0].shadowRoot
-  }
   it('dom renders correctly with the jsonbody property with a input of type TEXT and its value is expected to be set', async () => {
     const textInputjson = createTextInputFakeToJson()
 
@@ -21,8 +18,8 @@ describe('CInput component', () => {
     myForm.setAttribute('bodyjson', String(textInputjson))
     window.document.body.appendChild(myForm)
 
-    const renderCForm = getShadowRoot(CFORM_TAG as string)
-    const renderCInput = renderCForm?.querySelector('c-input')?.shadowRoot
+    const renderCForm = document.querySelector(CFORM_TAG)
+    const renderCInput = renderCForm?.querySelector(CINPUT_TAG)?.shadowRoot
     const value = renderCInput?.querySelector('input')?.getAttribute('value')
 
     expect(value).toBe(inputValue)
@@ -37,8 +34,8 @@ describe('CInput component', () => {
     myForm.setAttribute('bodyjson', String(passwordInputjson))
     window.document.body.appendChild(myForm)
 
-    const renderCForm = getShadowRoot(CFORM_TAG as string)
-    const renderCInput = renderCForm?.querySelector('c-input')?.shadowRoot
+    const renderCForm = document.querySelector(CFORM_TAG)
+    const renderCInput = renderCForm?.querySelector(CINPUT_TAG)?.shadowRoot
     const value = renderCInput?.querySelector('input')?.getAttribute('value')
 
     expect(value).toBe(inputValue)
@@ -54,8 +51,8 @@ describe('CInput component', () => {
     myForm.setAttribute('bodyjson', String(emailInputjson))
     window.document.body.appendChild(myForm)
 
-    const renderCForm = getShadowRoot(CFORM_TAG as string)
-    const renderCInput = renderCForm?.querySelector('c-input')?.shadowRoot
+    const renderCForm = document.querySelector(CFORM_TAG)
+    const renderCInput = renderCForm?.querySelector(CINPUT_TAG)?.shadowRoot
     const value = renderCInput?.querySelector('input')?.getAttribute('value')
 
     expect(value).toBe(inputValue)
