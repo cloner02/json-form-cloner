@@ -37,7 +37,9 @@ export function Utils (): ClassDecorator {
      */
     target.prototype.renderBodyjson = function (json: string) {
       this.bodyJsonParse = JSON.parse(json) ?? {}
-      const form = this.shadowRoot?.querySelector('form')
+      // const form = this.shadowRoot?.querySelector('form')
+      const cFormElement = this as unknown as HTMLElement
+      // console.log(cFormElement)
       for (const key in this.bodyJsonParse) {
         if (this.bodyJsonParse[key] !== null) {
           const typeOfElement = this.bodyJsonParse[key].type
@@ -47,7 +49,10 @@ export function Utils (): ClassDecorator {
             const keyOfTypeOfElement = typeOfElement as keyof typeof COMPONENT_ENUM
             const component: CBase = COMPONENT_ENUM[keyOfTypeOfElement](propertiesOfElement)
             this.elementsOfForm.push(component)
-            form.appendChild(component)
+            //form.appendChild(component)
+            if (cFormElement !== null) {
+              cFormElement.appendChild(component)
+            }
           }
         }
       }

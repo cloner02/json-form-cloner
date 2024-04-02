@@ -27,7 +27,7 @@ export class CForm extends CBase implements IPropertiesForm {
   }
 
   setValuesToChildren (): void {
-    this._form?.childNodes?.forEach((element: ChildNode) => {
+    this.childNodes?.forEach((element: ChildNode) => {
       if (element instanceof CBase) {
         if (element.value !== String(this.value[element.elementId])) {
           element.value = this.value[element.elementId]

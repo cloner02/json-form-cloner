@@ -10,6 +10,7 @@ export class CInput extends CBase implements IPropertiesInput {
     super(value, elementId, label)
     this._inputElement = null as unknown as HTMLInputElement
     this.typeInput = typeInput
+    this.setAttribute('slot', 'element')
   }
 
   updateValue (event: Event): void {
@@ -45,7 +46,7 @@ export class CInput extends CBase implements IPropertiesInput {
       .map(([ruleKey, ruleValue]) => `${ruleKey}=${ruleValue}`)
       .join(' ')
     return `
-    <div>
+    <div class='elementwrapper'>
       <label for='${this.elementId}'>${this.label}</label>
       <input placeholder="${this.label}" type='${this.typeInput.type}' id='${this.elementId}' value='${this.value}' ${propsRules}></input>
       <span id="${PREFIXMESSAGE}${this.elementId}"></span>
