@@ -9,17 +9,30 @@ export const ComponentTypeEnum = Object.freeze({
   BUTTON: 'button'
 })
 
+export interface IActionProperty {
+  methodname: string
+  parameters: string
+  event?: string[]
+}
+
+export interface IActions {
+  action?: Array<Record<string, IActionProperty>>
+}
+
 export interface InputJsonProperties {
   required: boolean
   rules?: IRules
 }
 
-export interface InputJsonPropertiesWithBaseProperties extends IBaseProperties, IDynamicBaseProperties, InputJsonProperties {
+export interface InputJsonPropertiesWithBaseProperties extends IBaseProperties, IDynamicBaseProperties, InputJsonProperties, IActions {
 }
 
-export interface BodyJsonProperties extends IBaseProperties, IDynamicBaseProperties, InputJsonProperties {
+export interface BodyJsonProperties extends IBaseProperties, IDynamicBaseProperties, InputJsonProperties, IActions {
   type: typeof ComponentTypeEnum[keyof typeof ComponentTypeEnum]
 }
 
+export interface ButtonJsonPropertiesWithBaseProperties extends IBaseProperties, IActions {
+}
+
 export type InputJsonPropertiesMap = Record<string, InputJsonPropertiesWithBaseProperties>
-export type ButtonJsonPropertiesMap = Record<string, IBaseProperties>
+export type ButtonJsonPropertiesMap = Record<string, ButtonJsonPropertiesWithBaseProperties>

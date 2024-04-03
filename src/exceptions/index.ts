@@ -21,3 +21,9 @@ export class FormNotFoundException extends Error {
     super('Form not found')
   }
 }
+
+export class MethodNotFoundException extends Error {
+  constructor (methodName: string) {
+    super(`Method ${methodName} not found`)
+  }
+}

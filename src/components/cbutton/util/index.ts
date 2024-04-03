@@ -1,10 +1,9 @@
-import { type CBase } from '../../../components/cbase/cbase'
 import { CButton } from '../../../components/cbutton/cbutton'
-import { type IBaseProperties } from '../../cbase/type/index'
+import { type ButtonJsonPropertiesWithBaseProperties } from '../../../type/index'
+import { type CBase } from '../../cbase/cbase'
 
-function getComponentButton (args: IBaseProperties): CBase {
+function getComponentButton (args: ButtonJsonPropertiesWithBaseProperties): CBase {
   const { elementId, label = '' } = args
-  console.log('args', args)
   return new CButton(elementId.toString(), label)
 }
 
