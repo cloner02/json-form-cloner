@@ -1,11 +1,13 @@
 import { BUTTON_SLOT } from '../../constants/index'
+import { type IActionProperty } from '../../type/index'
 import { CBase } from '../cbase/cbase'
 
 export class CButton extends CBase {
   private _buttonElement: HTMLButtonElement
-
-  constructor (elementId: string, label: string) {
+  actions: IActionProperty[] = []
+  constructor (elementId: string, label: string, actions: IActionProperty[] = []) {
     super(elementId, label)
+    this.actions = actions
     this._buttonElement = null as unknown as HTMLButtonElement
     this.setAttribute('slot', BUTTON_SLOT as string)
   }

@@ -11,12 +11,12 @@ export const ComponentTypeEnum = Object.freeze({
 
 export interface IActionProperty {
   methodname: string
-  parameters: string
+  parameters: object
   event?: string[]
 }
 
 export interface IActions {
-  action?: Array<Record<string, IActionProperty>>
+  actions?: IActionProperty[]
 }
 
 export interface InputJsonProperties {

@@ -29,7 +29,15 @@
           },
           "submit": {
             "type": "button",
-            "label": "Submit"
+            "label": "Submit",
+            "actions": [{
+              "methodname": "example",
+              "parameters": {
+                "username": "username",
+                "password": "password",
+                "email": "email"
+              }
+            }]
           }
         }'
     ></c-form>
