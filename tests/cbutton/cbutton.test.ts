@@ -12,7 +12,7 @@ describe('CButton component', () => {
   it('dom renders correctly with the jsonbody property with a button', async () => {
     const buttonjson = createButtonFakeToJson()
 
-    const buttonName = getPropertyValueFromJson('value', buttonjson)
+    const buttonName = getPropertyValueFromJson('label', buttonjson)
 
     const myForm = document.createElement(CFORM_TAG)
     myForm.setAttribute('id', 'form1')

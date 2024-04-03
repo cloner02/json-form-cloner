@@ -8,7 +8,7 @@ export function createButtonFake (): typeof ButtonJsonPropertiesMap {
   return {
     [inputKey]: {
       type: ComponentTypeEnum.BUTTON,
-      value: faker.lorem.word()
+      label: faker.lorem.word()
     }
   }
 }

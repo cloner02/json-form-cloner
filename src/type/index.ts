@@ -1,5 +1,6 @@
 import { type IBaseProperties } from '../components/cbase/type/index'
 import { type IRules } from '../components/cinput/type/index'
+import { type IDynamicBaseProperties } from '../components/cstaticbase/type/index'
 
 export const ComponentTypeEnum = Object.freeze({
   TEXT: 'text',
@@ -13,10 +14,10 @@ export interface InputJsonProperties {
   rules?: IRules
 }
 
-export interface InputJsonPropertiesWithBaseProperties extends IBaseProperties, InputJsonProperties {
+export interface InputJsonPropertiesWithBaseProperties extends IBaseProperties, IDynamicBaseProperties, InputJsonProperties {
 }
 
-export interface BodyJsonProperties extends IBaseProperties, InputJsonProperties {
+export interface BodyJsonProperties extends IBaseProperties, IDynamicBaseProperties, InputJsonProperties {
   type: typeof ComponentTypeEnum[keyof typeof ComponentTypeEnum]
 }
 

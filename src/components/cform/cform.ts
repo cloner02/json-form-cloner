@@ -1,13 +1,13 @@
-import { CBase } from '../cbase/cbase'
 import style from './../../template/cForm/cform.css'
 import template from './../../template/cForm/cform.html'
 import { type IPropertiesForm } from './type/index'
 import { Utils } from '../../decorators/utils'
 import FormsCollection from '../../singleton/index'
 import { VALUECHANGEDEVENT } from '../../constants/index'
+import { CDynamicBase } from '../cstaticbase/cstaticbase'
 
 @Utils()
-export class CForm extends CBase implements IPropertiesForm {
+export class CForm extends CDynamicBase implements IPropertiesForm {
   bodyjson: string
   private _form: HTMLFormElement
   private _isConnected: boolean = false
@@ -28,7 +28,7 @@ export class CForm extends CBase implements IPropertiesForm {
 
   setValuesToChildren (): void {
     this.childNodes?.forEach((element: ChildNode) => {
-      if (element instanceof CBase) {
+      if (element instanceof CDynamicBase) {
         if (element.value !== String(this.value[element.elementId])) {
           element.value = this.value[element.elementId]
         }
@@ -38,7 +38,7 @@ export class CForm extends CBase implements IPropertiesForm {
 
   getValuesFromChildren (): void {
     this.childNodes.forEach((element: ChildNode) => {
-      if (element instanceof CBase) {
+      if (element instanceof CDynamicBase) {
         this.value[element.elementId] = element.value
 
         element.addEventListener(VALUECHANGEDEVENT, (event: Event) => {

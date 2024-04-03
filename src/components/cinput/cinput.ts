@@ -1,8 +1,8 @@
 import { ELEMENT_SLOT, PREFIXMESSAGE } from '../../constants/index'
-import { CBase } from '../cbase/cbase'
+import { CDynamicBase } from '../cstaticbase/cstaticbase'
 import { type ITypeInput, type IPropertiesInput } from './type/index'
 
-export class CInput extends CBase implements IPropertiesInput {
+export class CInput extends CDynamicBase implements IPropertiesInput {
   typeInput: ITypeInput
   private _inputElement: HTMLInputElement
 

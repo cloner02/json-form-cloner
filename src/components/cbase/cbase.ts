@@ -1,5 +1,3 @@
-import { PREFIXMESSAGE } from '../../constants/index'
-import { valueChangedEvent } from '../../events/index'
 import { EmptyIdException } from '../../exceptions/index'
 import { type IBaseProperties } from './type/index'
 
@@ -8,28 +6,12 @@ export abstract class CBase extends HTMLElement implements IBaseProperties {
   label: string
   elementId: string
 
-  protected _value: any
-
-  get value (): any {
-    return this._value
-  }
-
-  set value (newValue: any) {
-    const oldValue = this._value
-    if (oldValue !== newValue) {
-      this._value = newValue
-      void this.propertyChangedCallback('value', oldValue, newValue)
-    }
-  }
-
-  static observedAttributes = ['value']
   private readonly connectedPromise: Promise<void> | undefined
   private resolveConnectedPromise!: () => void
 
-  constructor (value: any, elementId: string, label?: string) {
+  constructor (elementId: string, label?: string) {
     super()
     this.label = label ?? ''
-    this.value = value
     this.elementId = elementId
     this.attachShadow({ mode: 'open' })
     this.connectedPromise = new Promise<void>((resolve) => {
@@ -80,40 +62,13 @@ export abstract class CBase extends HTMLElement implements IBaseProperties {
   }
 
   attributeChangedCallback (name: any, oldValue: any, newValue: any): void {
-    if (name === 'value') {
-      this.dispatchEvent(valueChangedEvent({
-        name,
-        newValue,
-        oldValue,
-        elementId: this.elementId
-      }))
-    }
   }
 
   async propertyChangedCallback (name: any, oldValue: any, newValue: any): Promise<void> {
     await this.connectedPromise
-    if (name === 'value') {
-      this.dispatchEvent(valueChangedEvent({
-        name,
-        newValue,
-        oldValue,
-        elementId: this.elementId
-      }))
-    }
   }
 
   render (): void {
     this.shadowRoot?.append(document.importNode(this.template().content, true))
-  }
-
-  isValidate (): boolean {
-    return true
-  }
-
-  showValidationMessage (message: string): void {
-    const msgElement = this.shadowRoot?.querySelector(`#${PREFIXMESSAGE}${this.elementId}`)
-    if (msgElement !== undefined && msgElement !== null) {
-      msgElement.innerHTML = (this.isValidate()) ? message : ''
-    }
   }
 }
