@@ -35,7 +35,8 @@
     ></c-form>
 </body>
 <script>
-   const formController = new __.FormController("login");
+   const appController = new __.AppController();
+   const formController = appController.getFormController("login");
    //get Values from the form identified by the id "login"
    let values = Object(formController.getValues());
    console.log(values);
