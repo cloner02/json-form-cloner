@@ -2,7 +2,7 @@ import style from './../../template/cForm/cform.css'
 import template from './../../template/cForm/cform.html'
 import { type IPropertiesForm } from './type/index'
 import { Utils } from '../../decorators/utils'
-import FormsCollection from '../../singleton/index'
+import FormsCollection from '../../singleton/formsCollection'
 import { VALUECHANGEDEVENT } from '../../constants/index'
 import { CDynamicBase } from '../cstaticbase/cstaticbase'
 
