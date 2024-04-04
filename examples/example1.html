@@ -44,6 +44,11 @@
 </body>
 <script>
    const appController = new __.AppController();
+   const methods = appController.methodCollection;
+   methods.addMethod("example", function(params) {
+     console.log(params);
+   });
+   console.log('methodCollection', appController.methodCollection);
    const formController = appController.getFormController("login");
    //get Values from the form identified by the id "login"
    let values = Object(formController.getValues());

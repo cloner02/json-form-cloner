@@ -7,6 +7,10 @@ class MethodCollection {
 
   }
 
+  public getMethods (): Record<string, (...args: any[]) => any> {
+    return MethodCollection.getInstance().methods
+  }
+
   public addMethod (name: string, method: (...args: any[]) => any): void {
     MethodCollection.getInstance().methods[name] = method
   }

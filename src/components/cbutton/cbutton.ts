@@ -1,8 +1,10 @@
 import { BUTTON_SLOT } from '../../constants/index'
-import { type IActionProperty } from '../../type/index'
+import { Actions } from '../../decorators/actions'
+import { type IActions, type IActionProperty } from '../../type/index'
 import { CBase } from '../cbase/cbase'
 
-export class CButton extends CBase {
+@Actions()
+export class CButton extends CBase implements IActions {
   private _buttonElement: HTMLButtonElement
   actions: IActionProperty[] = []
   constructor (elementId: string, label: string, actions: IActionProperty[] = []) {
@@ -12,17 +14,14 @@ export class CButton extends CBase {
     this.setAttribute('slot', BUTTON_SLOT as string)
   }
 
-  callAction (): void {
-    console.log('Button clicked')
-  }
-
   clickEvent (): void {
-    this._inputElement.addEventListener('click', this.callAction.bind(this))
+    this._buttonElement.addEventListener('click', () => this.actionCallback())
   }
 
   connectedCallback (): void {
     super.connectedCallback()
     this._buttonElement = this.shadowRoot?.querySelector('button') as Element as HTMLButtonElement
+    this.clickEvent()
   }
 
   html (): string {
