@@ -1,4 +1,5 @@
 import { ELEMENT_SLOT, PREFIXMESSAGE } from '../../constants/index'
+import { ruleMsg } from '../../decorators/rules'
 import { CDynamicBase } from '../cstaticbase/cstaticbase'
 import { type ITypeInput, type IPropertiesInput } from './type/index'
 
@@ -23,7 +24,7 @@ export class CInput extends CDynamicBase implements IPropertiesInput {
   }
 
   onBlurEvent (): void {
-    this._inputElement.addEventListener('blur', super.showValidationMessage.bind(this, 'event'))
+    this._inputElement.addEventListener('blur', this.showValidationMessage.bind(this, undefined))
   }
 
   connectedCallback (): void {
@@ -56,6 +57,11 @@ export class CInput extends CDynamicBase implements IPropertiesInput {
 
   css (): string {
     return ''
+  }
+
+  @ruleMsg(instance => instance.typeInput.rules)
+  showValidationMessage (message?: string): void {
+    super.showValidationMessage(message)
   }
 }
 

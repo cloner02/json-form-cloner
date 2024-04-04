@@ -75,14 +75,10 @@ export abstract class CDynamicBase extends CBase implements IDynamicBaseProperti
     super.render()
   }
 
-  isValidate (): boolean {
-    return true
-  }
-
-  showValidationMessage (message: string): void {
+  showValidationMessage (message?: string): void {
     const msgElement = this.shadowRoot?.querySelector(`#${PREFIXMESSAGE}${this.elementId}`)
     if (msgElement !== undefined && msgElement !== null) {
-      msgElement.innerHTML = (this.isValidate()) ? message : ''
+      msgElement.innerHTML = message ?? ''
     }
   }
 }
