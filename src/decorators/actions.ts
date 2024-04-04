@@ -1,3 +1,4 @@
+import { replaceValue } from '../common/value'
 import { MethodNotFoundException } from '../exceptions/index'
 import MethodCollection from '../singleton/methodCollection'
 import { type IActionProperty } from '../type/index'
@@ -11,7 +12,7 @@ export function Actions (): ClassDecorator {
       for (const action of actions) {
         if (methods !== undefined && typeof methods[action.methodname] === 'function') {
           const parameters: string[] = getParameters(methods[action.methodname])
-          const parameterValues: unknown[] = parameters.map(parameter => action.parameters[parameter])
+          const parameterValues: unknown[] = parameters.map(parameter => replaceValue(this as HTMLElement, action.parameters[parameter]))
           const result = methods[action.methodname](...parameterValues)
           if (result !== undefined) { return result }
         } else {
