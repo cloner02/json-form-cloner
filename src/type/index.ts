@@ -11,7 +11,7 @@ export const ComponentTypeEnum = Object.freeze({
 
 export interface IActionProperty {
   methodname: string
-  parameters: object
+  parameters: Record<string, any>
   event?: string[]
 }
 

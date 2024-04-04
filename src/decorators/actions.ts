@@ -7,18 +7,24 @@ export function Actions (): ClassDecorator {
     target.prototype.actionCallback = function (): any {
       const actions: IActionProperty[] = this.actions
       const methods = MethodCollection.getInstance().getMethods()
-      console.log('methods', methods)
-      console.log(actions, 'actions')
 
       for (const action of actions) {
         if (methods !== undefined && typeof methods[action.methodname] === 'function') {
-          console.log('parameters', Object.entries(action.parameters))
-          const result = methods[action.methodname](...Object.entries(action.parameters))
+          const parameters: string[] = getParameters(methods[action.methodname])
+          const parameterValues: unknown[] = parameters.map(parameter => action.parameters[parameter])
+          const result = methods[action.methodname](...parameterValues)
           if (result !== undefined) { return result }
         } else {
           throw new MethodNotFoundException(action.methodname)
         }
       }
+    }
+    function getParameters (func: (...args: any[]) => any): string[] {
+      const functionAsString = func.toString()
+      const parametersAsString = functionAsString.slice(functionAsString.indexOf('(') + 1, functionAsString.indexOf(')'))
+      const parametersWithoutComments = parametersAsString.replace(/\/\*.*?\*\//g, '') // remove comments
+      const parameters = parametersWithoutComments.split(',').map(parameter => parameter.trim())
+      return parameters
     }
   }
 }
