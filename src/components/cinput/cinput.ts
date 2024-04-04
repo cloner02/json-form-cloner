@@ -2,7 +2,7 @@ import { ELEMENT_SLOT, PREFIXMESSAGE } from '../../constants/index'
 import { ruleMsg } from '../../decorators/rules'
 import { CDynamicBase } from '../cstaticbase/cstaticbase'
 import { type ITypeInput, type IPropertiesInput } from './type/index'
-
+import style from './../../template/cInput/cinput.css'
 export class CInput extends CDynamicBase implements IPropertiesInput {
   typeInput: ITypeInput
   private _inputElement: HTMLInputElement
@@ -38,6 +38,12 @@ export class CInput extends CDynamicBase implements IPropertiesInput {
     await super.propertyChangedCallback(name, oldValue, newValue)
     if (name === 'value') {
       this._inputElement.value = newValue
+      const labelElement = this.shadowRoot?.querySelector('label')
+      if (newValue !== null && newValue !== '' && newValue !== undefined) {
+        labelElement?.classList.add('top')
+      } else {
+        labelElement?.classList.remove('top')
+      }
     }
   }
 
@@ -48,15 +54,16 @@ export class CInput extends CDynamicBase implements IPropertiesInput {
       .join(' ')
     return `
     <div class='elementwrapper'>
+      <input type='${this.typeInput.type}' id='${this.elementId}' value='${this.value}' ${propsRules}></input>
       <label for='${this.elementId}'>${this.label}</label>
-      <input placeholder="${this.label}" type='${this.typeInput.type}' id='${this.elementId}' value='${this.value}' ${propsRules}></input>
       <span id="${PREFIXMESSAGE}${this.elementId}"></span>
     </div>
   `
   }
 
   css (): string {
-    return ''
+    // eslint-disable-next-line @typescript-eslint/no-base-to-string, @typescript-eslint/restrict-template-expressions
+    return `${style}`
   }
 
   @ruleMsg(instance => instance.typeInput.rules)

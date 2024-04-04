@@ -2,6 +2,7 @@ import { BUTTON_SLOT } from '../../constants/index'
 import { Actions } from '../../decorators/actions'
 import { type IActions, type IActionProperty } from '../../type/index'
 import { CBase } from '../cbase/cbase'
+import style from './../../template/cButton/cbutton.css'
 
 @Actions()
 export class CButton extends CBase implements IActions {
@@ -33,7 +34,8 @@ export class CButton extends CBase implements IActions {
   }
 
   css (): string {
-    return ''
+    // eslint-disable-next-line @typescript-eslint/no-base-to-string, @typescript-eslint/restrict-template-expressions
+    return `${style}`
   }
 }
 
