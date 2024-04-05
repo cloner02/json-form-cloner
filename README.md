@@ -16,26 +16,49 @@ This simple example below creates a form with two inputs, one for entering text 
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>TypeScript Web Component</title>
 </head>
-<script src="dist-webpack/bundle.js"></script>
+<script src="../dist-webpack/bundle.js"></script>
 <body>
     <c-form id="login" bodyjson='{
         "username": {
             "type": "text",
-            "label": "User Name:",
+            "label": "User Name",
             "value": "Juan",
             "required": true
           },
           "password": {
             "type": "password",
-            "label": "Password :",
+            "label": "Password",
             "value": "MyPassword",
             "required": true
+          },
+          "email": {
+            "type": "email",
+            "label": "Email",
+            "value": "myEmail@ggmail.com",
+            "required": true
+          },
+          "submit": {
+            "type": "button",
+            "label": "Submit",
+            "actions": [{
+              "methodname": "example",
+              "parameters": {
+                "username": "${username}",
+                "password": "${password}",
+                "email": "email"
+              }
+            }]
           }
         }'
     ></c-form>
 </body>
 <script>
-   const formController = new __.FormController("login");
+   const appController = new __.AppController();
+   const methods = appController.methodCollection;
+   methods.addMethod("example", function(password, email, username) {
+     alert(password + " " + email + " " + username);
+   });
+   const formController = appController.getFormController("login");
    //get Values from the form identified by the id "login"
    let values = Object(formController.getValues());
    console.log(values);

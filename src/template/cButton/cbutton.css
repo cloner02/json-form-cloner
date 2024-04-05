@@ -10,10 +10,18 @@ button {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 12px;
+    transition: all 0.5s ease;
+    font-family: 'HelveticaNeue', 'Arial', sans-serif;
+}
+
+button:active {
+    background-color: palegoldenrod;
+    color: orange;
+    border: 2px solid orange;
 }
 
 button:hover {
     background-color: white;
     color: orange;
-    border: 2px solid orange;
+    border: 1px solid orange;
 }
