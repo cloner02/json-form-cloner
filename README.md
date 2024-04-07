@@ -53,9 +53,9 @@ This simple example below creates a form with two inputs, one for entering text 
     ></c-form>
 </body>
 <script>
-   const appController = new __.AppController();
+   const appController = new AppController();
    const methods = appController.methodCollection;
-   methods.addMethod("example", function(password, email, username) {
+   methods.add("example", function(password, email, username) {
      alert(password + " " + email + " " + username);
    });
    const formController = appController.getFormController("login");

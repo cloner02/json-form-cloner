@@ -11,11 +11,11 @@ class MethodCollection {
     return MethodCollection.getInstance().methods
   }
 
-  public addMethod (name: string, method: (...args: any[]) => any): void {
+  public add (name: string, method: (...args: any[]) => any): void {
     MethodCollection.getInstance().methods[name] = method
   }
 
-  public addMethods (methods: Record<string, (...args: any[]) => any>): void {
+  public replaceList (methods: Record<string, (...args: any[]) => any>): void {
     MethodCollection.getInstance().methods = methods
   }
 
