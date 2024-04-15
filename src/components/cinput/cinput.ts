@@ -1,5 +1,5 @@
 import { ELEMENT_SLOT, PREFIXMESSAGE } from '../../constants/index'
-import { ruleMsg } from '../../decorators/rules'
+import { ruleMsg } from '../../decorators/rules/rules'
 import { CDynamicBase } from '../cstaticbase/cstaticbase'
 import { type ITypeInput, type IPropertiesInput } from './type/index'
 import style from './../../template/cInput/cinput.css'

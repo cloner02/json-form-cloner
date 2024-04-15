@@ -11,12 +11,15 @@ class MethodCollection {
     return MethodCollection.getInstance().methods
   }
 
-  public add (name: string, method: (...args: any[]) => any): void {
-    MethodCollection.getInstance().methods[name] = method
+  public add (methods: Array<(...args: any[]) => any> = []): void {
+    methods.forEach((method) => {
+      MethodCollection.getInstance().methods[method.name] = method
+    })
   }
 
-  public replaceList (methods: Record<string, (...args: any[]) => any>): void {
-    MethodCollection.getInstance().methods = methods
+  public replace (methods: Array<(...args: any[]) => any> = []): void {
+    MethodCollection.getInstance().clean()
+    MethodCollection.getInstance().add(methods)
   }
 
   public clean (): void {

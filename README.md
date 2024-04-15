@@ -55,12 +55,13 @@ This simple example below creates a form with two inputs, one for entering text 
 <script>
    const appController = new AppController();
    const methods = appController.methodCollection;
-   methods.add("example", function(password, email, username) {
+   function example(password, email, username) {
      alert(password + " " + email + " " + username);
-   });
+    }
+   methods.add("example", example);
    const formController = appController.getFormController("login");
    //get Values from the form identified by the id "login"
-   let values = Object(formController.getValues());
+   let values = formController.getValues();
    console.log(values);
    //edit the values of the form called login in 5 seconds for you can see the changes. The username value will change of "Juan" to "Carlos"
    setTimeout(function() {
