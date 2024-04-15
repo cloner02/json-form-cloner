@@ -7,7 +7,6 @@ interface ITypeInput {
 
 interface IPropertiesInput extends IBaseProperties {
   typeInput: ITypeInput
-  updateValue: (event: Event) => void
   inputEvent: () => void
   onBlurEvent: () => void
 }

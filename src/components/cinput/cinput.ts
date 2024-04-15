@@ -1,8 +1,9 @@
 import { ELEMENT_SLOT, PREFIXMESSAGE } from '../../constants/index'
-import { ruleMsg } from '../../decorators/rules/rules'
+import { ruleMsg } from '../../decorators/rules/index'
 import { CDynamicBase } from '../cstaticbase/cstaticbase'
 import { type ITypeInput, type IPropertiesInput } from './type/index'
 import style from './../../template/cInput/cinput.css'
+import handlers from './handler/index'
 export class CInput extends CDynamicBase implements IPropertiesInput {
   typeInput: ITypeInput
   private _inputElement: HTMLInputElement
@@ -14,13 +15,11 @@ export class CInput extends CDynamicBase implements IPropertiesInput {
     this.setAttribute('slot', ELEMENT_SLOT as string)
   }
 
-  updateValue (event: Event): void {
-    const target = event.target as HTMLInputElement
-    this.value = target.value
-  }
-
   inputEvent (): void {
-    this._inputElement.addEventListener('input', this.updateValue.bind(this))
+    this._inputElement.addEventListener('input', (event: Event) => {
+      const target = event.target as HTMLInputElement
+      this.value = target.value
+    })
   }
 
   onBlurEvent (): void {
@@ -36,14 +35,8 @@ export class CInput extends CDynamicBase implements IPropertiesInput {
 
   async propertyChangedCallback (name: string, oldValue: any, newValue: any): Promise<void> {
     await super.propertyChangedCallback(name, oldValue, newValue)
-    if (name === 'value') {
-      this._inputElement.value = newValue
-      const labelElement = this.shadowRoot?.querySelector('label')
-      if (newValue !== null && newValue !== '' && newValue !== undefined) {
-        labelElement?.classList.add('top')
-      } else {
-        labelElement?.classList.remove('top')
-      }
+    if (handlers[name] !== undefined) {
+      handlers[name](this, newValue, oldValue)
     }
   }
 

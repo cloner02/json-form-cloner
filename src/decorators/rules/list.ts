@@ -1,6 +1,6 @@
 import { type CBase } from '../../components/cbase/cbase'
 import { type IRulesRange, type IRules } from '../../components/cinput/type/index'
-import { type IRulesCondition } from '../type/index'
+import { type IRulesCondition } from '../rules/type/index'
 
 const pattern: IRulesCondition = {
   name: 'pattern',

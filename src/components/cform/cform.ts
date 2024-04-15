@@ -5,6 +5,7 @@ import { Utils } from '../../decorators/utils'
 import FormsCollection from '../../singleton/formsCollection'
 import { VALUECHANGEDEVENT } from '../../constants/index'
 import { CDynamicBase } from '../cstaticbase/cstaticbase'
+import handlers from './handler/index'
 
 @Utils()
 export class CForm extends CDynamicBase implements IPropertiesForm {
@@ -55,24 +56,21 @@ export class CForm extends CDynamicBase implements IPropertiesForm {
     super.connectedCallback()
     this._form = this.shadowRoot?.querySelector('form') as Element as HTMLFormElement
     this._isConnected = true
-    this.renderBodyjson(this.bodyjson)
+    handlers.bodyjson(this, this.bodyjson)
     this.getValuesFromChildren()
   }
 
   attributeChangedCallback (name: any, oldValue: any, newValue: any): void {
     super.attributeChangedCallback(name, oldValue, newValue)
-    if (name === 'bodyjson' && this._isConnected) {
-      this.renderBodyjson(newValue)
+    if (handlers[name] !== undefined && this._isConnected) {
+      handlers[name](this, newValue, oldValue)
     }
   }
 
   async propertyChangedCallback (name: any, oldValue: any, newValue: any): Promise<void> {
     await super.propertyChangedCallback(name, oldValue, newValue)
-    if (name === 'value') {
-      this.setValuesToChildren()
-    }
-    if (name === 'bodyjson') {
-      this.renderBodyjson(newValue)
+    if (handlers[name] !== undefined) {
+      handlers[name](this, newValue, oldValue)
     }
   }
 
