@@ -4,6 +4,8 @@ import { CDynamicBase } from '../cstaticbase/cstaticbase'
 import { type ITypeInput, type IPropertiesInput } from './type/index'
 import style from './../../template/cInput/cinput.css'
 import handlers from './handler/index'
+import { debounce } from '../../utils/index'
+
 export class CInput extends CDynamicBase implements IPropertiesInput {
   typeInput: ITypeInput
   private _inputElement: HTMLInputElement
@@ -19,6 +21,7 @@ export class CInput extends CDynamicBase implements IPropertiesInput {
     this._inputElement.addEventListener('input', (event: Event) => {
       const target = event.target as HTMLInputElement
       this.value = target.value
+      debounce(() => { this.showValidationMessage(undefined) }, 500)
     })
   }
 
@@ -49,7 +52,7 @@ export class CInput extends CDynamicBase implements IPropertiesInput {
     <div class='elementwrapper'>
       <input type='${this.typeInput.type}' id='${this.elementId}' value='${this.value}' ${propsRules}></input>
       <label for='${this.elementId}'>${this.label}</label>
-      <span id="${PREFIXMESSAGE}${this.elementId}"></span>
+      <span class='tooltip' id="${PREFIXMESSAGE}${this.elementId}"></span>
     </div>
   `
   }
@@ -62,6 +65,8 @@ export class CInput extends CDynamicBase implements IPropertiesInput {
   @ruleMsg(instance => instance.typeInput.rules)
   showValidationMessage (message?: string): void {
     super.showValidationMessage(message)
+    const msgElement = this.shadowRoot?.querySelector(`#${PREFIXMESSAGE}${this.elementId}`) as unknown as HTMLElement
+    msgElement.style.visibility = message !== null && message !== undefined && message?.trim() !== '' && this.value.trim() !== '' ? 'visible' : 'hidden'
   }
 }
 

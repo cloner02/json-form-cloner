@@ -15,3 +15,12 @@ export function getPropertyValueFromJson (propertyName: string, json: string): s
   }
   return infoOfElement[propertyName]
 }
+
+export function debounce (callback: (...args: any[]) => any, waitTime: number): void {
+  let timer: ReturnType<typeof setTimeout> | null = null
+
+  if (timer !== null) {
+    clearTimeout(timer)
+  }
+  timer = setTimeout(() => callback(), waitTime)
+}

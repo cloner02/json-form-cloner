@@ -28,7 +28,32 @@ input
 
 input:focus ~ label, label.top {
     top: 1px;
-    left: 50px;
+    left: 5%;
+}
+
+.tooltip {
+    width: fit-content;
+    background-color: black;
+    color: #fff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 6px;
+    position: sticky;
+    display: block;
+    margin-left:5%;
+    z-index: 1;
+    visibility: hidden;
+}
+
+.tooltip::after {
+    content: "";
+    position: absolute;
+    left: 1%;
+    bottom:100%;
+    margin-left: 5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
 }
 
 label {
@@ -36,7 +61,7 @@ label {
     position: absolute;
     color: #8a8a8a;
     top: 29px;
-    left: 50px;
+    left: 5%;
     background-color: #fff;
     font-family: 'HelveticaNeue', 'Arial', sans-serif;
 }
