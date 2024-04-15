@@ -58,7 +58,7 @@ This simple example below creates a form with two inputs, one for entering text 
    function example(password, email, username) {
      alert(password + " " + email + " " + username);
     }
-   methods.add("example", example);
+   methods.add([example]);
    const formController = appController.getFormController("login");
    //get Values from the form identified by the id "login"
    let values = formController.getValues();
