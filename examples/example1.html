@@ -7,40 +7,42 @@
   <title>TypeScript Web Component</title>
 </head>
 <script src="../dist-webpack/bundle.js"></script>
-<body>
-    <c-form id="login" bodyjson='{
-        "username": {
-            "type": "text",
-            "label": "User Name",
-            "value": "Juan",
-            "required": true
-          },
-          "password": {
-            "type": "password",
-            "label": "Password",
-            "value": "MyPassword",
-            "required": true
-          },
-          "email": {
-            "type": "email",
-            "label": "Email",
-            "value": "myEmail@ggmail.com",
-            "required": true
-          },
-          "submit": {
-            "type": "button",
-            "label": "Submit",
-            "actions": [{
-              "methodname": "example",
-              "parameters": {
-                "username": "${username}",
-                "password": "${password}",
-                "email": "email"
-              }
-            }]
-          }
-        }'
-    ></c-form>
+<body style="margin: 0;padding: 0;">
+    <div class="wrapper" style="height:100vh">
+      <c-form id="login" bodyjson='{
+          "username": {
+              "type": "text",
+              "label": "User Name",
+              "value": "Juan",
+              "required": true
+            },
+            "password": {
+              "type": "password",
+              "label": "Password",
+              "value": "MyPassword",
+              "required": true
+            },
+            "email": {
+              "type": "email",
+              "label": "Email",
+              "value": "myEmail@ggmail.com",
+              "required": true
+            },
+            "submit": {
+              "type": "button",
+              "label": "Submit",
+              "actions": [{
+                "methodname": "example",
+                "parameters": {
+                  "username": "${username}",
+                  "password": "${password}",
+                  "email": "email"
+                }
+              }]
+            }
+          }'
+      ></c-form>
+    </div>
 </body>
 <script>
    const appController = new AppController();
