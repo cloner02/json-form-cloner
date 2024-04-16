@@ -5,6 +5,7 @@ import { type ITypeInput, type IPropertiesInput } from './type/index'
 import style from './../../template/cInput/cinput.css'
 import handlers from './handler/index'
 import { debounce } from '../../utils/index'
+import { mandatoryMsg } from '../../decorators/mandatory'
 
 export class CInput extends CDynamicBase implements IPropertiesInput {
   typeInput: ITypeInput
@@ -72,6 +73,7 @@ export class CInput extends CDynamicBase implements IPropertiesInput {
     msgElement.style.visibility = message !== null && message !== undefined && message?.trim() !== '' && this.value.trim() !== '' ? 'visible' : 'hidden'
   }
 
+  @mandatoryMsg(instance => instance)
   @ruleMsg(instance => instance.typeInput.rules)
   getMessageError (message?: string): string | null {
     return super.getMessageError(message)

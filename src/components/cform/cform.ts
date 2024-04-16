@@ -6,7 +6,6 @@ import FormsCollection from '../../singleton/formsCollection'
 import { VALUECHANGEDEVENT } from '../../constants/index'
 import { CDynamicBase } from '../cstaticbase/cstaticbase'
 import handlers from './handler/index'
-import { CInput } from '../cinput/cinput'
 
 @Utils()
 export class CForm extends CDynamicBase implements IPropertiesForm {
@@ -55,12 +54,13 @@ export class CForm extends CDynamicBase implements IPropertiesForm {
 
   checkFields (): Record<string, string> | null {
     const listMessages: Record<string, string> = {}
-    this.childNodes.forEach((element: ChildNode) => {
-      if (element instanceof CInput) {
-        if (element.mandatory && element.value === '') {
-          const messageError = element.getMessageError('mandatory')
+    this.childNodes.forEach((node: ChildNode) => {
+      const element = node as CDynamicBase
+      if ('mandatory' in element) {
+        if (element.mandatory as boolean) {
+          const messageError = element.getMessageError(undefined)
           if (messageError !== null) {
-            listMessages[element.elementId] = element.getMessageError('mandatory') ?? ''
+            listMessages[element.elementId] = messageError
           }
         }
       }

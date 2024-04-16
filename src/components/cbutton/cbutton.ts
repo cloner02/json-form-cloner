@@ -1,9 +1,11 @@
 import { BUTTON_SLOT } from '../../constants/index'
 import { Actions } from '../../decorators/actions'
+import { Check } from '../../decorators/check'
 import { type IActions, type IActionProperty } from '../../type/index'
 import { CBase } from '../cbase/cbase'
 import style from './../../template/cButton/cbutton.css'
 
+@Check()
 @Actions()
 export class CButton extends CBase implements IActions {
   private _buttonElement: HTMLButtonElement
@@ -16,7 +18,10 @@ export class CButton extends CBase implements IActions {
   }
 
   clickEvent (): void {
-    this._buttonElement.addEventListener('click', () => this.actionCallback())
+    this._buttonElement.addEventListener('click', () => {
+      this.actionCallback()
+      // console.log('checkFields', this.checkFields())
+    })
   }
 
   connectedCallback (): void {

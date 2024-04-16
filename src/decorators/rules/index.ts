@@ -14,7 +14,7 @@ export function ruleMsg (getRules: (instance: any) => IRules): MethodDecorator {
     descriptor.value = function (...args: any[]) {
       const rules = getRules(this)
       const msgError = msgErrorRules(this as CBase, rules)
-      args[0] = (args[0] === undefined && msgError != null) ? msgError : args[0]
+      args[0] = (args[0] === undefined && msgError !== null) ? msgError : args[0]
       return originaMethod.apply(this, args)
     }
   }
