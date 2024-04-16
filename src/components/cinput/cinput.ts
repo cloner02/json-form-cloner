@@ -71,6 +71,11 @@ export class CInput extends CDynamicBase implements IPropertiesInput {
     const msgElement = this.shadowRoot?.querySelector(`#${PREFIXMESSAGE}${this.elementId}`) as unknown as HTMLElement
     msgElement.style.visibility = message !== null && message !== undefined && message?.trim() !== '' && this.value.trim() !== '' ? 'visible' : 'hidden'
   }
+
+  @ruleMsg(instance => instance.typeInput.rules)
+  getMessageError (message?: string): string | null {
+    return super.getMessageError(message)
+  }
 }
 
 customElements.define('c-input', CInput)

@@ -6,6 +6,7 @@ import FormsCollection from '../../singleton/formsCollection'
 import { VALUECHANGEDEVENT } from '../../constants/index'
 import { CDynamicBase } from '../cstaticbase/cstaticbase'
 import handlers from './handler/index'
+import { CInput } from '../cinput/cinput'
 
 @Utils()
 export class CForm extends CDynamicBase implements IPropertiesForm {
@@ -50,6 +51,21 @@ export class CForm extends CDynamicBase implements IPropertiesForm {
         })
       }
     })
+  }
+
+  checkFields (): Record<string, string> | null {
+    const listMessages: Record<string, string> = {}
+    this.childNodes.forEach((element: ChildNode) => {
+      if (element instanceof CInput) {
+        if (element.mandatory && element.value === '') {
+          const messageError = element.getMessageError('mandatory')
+          if (messageError !== null) {
+            listMessages[element.elementId] = element.getMessageError('mandatory') ?? ''
+          }
+        }
+      }
+    })
+    return Object.keys(listMessages).length > 0 ? listMessages : null
   }
 
   connectedCallback (): void {

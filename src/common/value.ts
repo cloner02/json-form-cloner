@@ -1,7 +1,7 @@
-import { CFORM_TAG } from '../constants/index'
+import { getParentForm } from './form'
 
 function getFormValues (element: HTMLElement): any {
-  const parentForm = element.closest(CFORM_TAG)
+  const parentForm = getParentForm(element)
   return parentForm?.value
 }
 

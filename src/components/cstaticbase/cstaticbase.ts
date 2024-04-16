@@ -81,4 +81,8 @@ export abstract class CDynamicBase extends CBase implements IDynamicBaseProperti
       msgElement.innerHTML = message ?? ''
     }
   }
+
+  getMessageError (message?: string): string | null {
+    return message ?? null
+  }
 }

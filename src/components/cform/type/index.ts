@@ -4,4 +4,5 @@ export interface IPropertiesForm extends IBaseProperties {
   bodyjson: string
   getValuesFromChildren: () => void
   setValuesToChildren: () => void
+  checkFields: () => Record<string, string> | null
 }
