@@ -8,10 +8,12 @@ import { debounce } from '../../utils/index'
 
 export class CInput extends CDynamicBase implements IPropertiesInput {
   typeInput: ITypeInput
+  mandatory: boolean
   private _inputElement: HTMLInputElement
 
-  constructor (value: any, elementId: string, label: string, typeInput: ITypeInput) {
+  constructor (value: any, elementId: string, label: string, mandatory: boolean, typeInput: ITypeInput) {
     super(value, elementId, label)
+    this.mandatory = mandatory
     this._inputElement = null as unknown as HTMLInputElement
     this.typeInput = typeInput
     this.setAttribute('slot', ELEMENT_SLOT as string)
@@ -44,14 +46,15 @@ export class CInput extends CDynamicBase implements IPropertiesInput {
   }
 
   html (): string {
-    const propsRules = Object.entries(this.typeInput.rules)
+    const mandatory = this.mandatory ? '*' : ''
+    const propsRules = Object.entries(this.typeInput?.rules ?? {})
       .filter(([ruleKey, ruleValue]) => ruleValue !== null && ruleKey !== '')
       .map(([ruleKey, ruleValue]) => `${ruleKey}=${ruleValue}`)
       .join(' ')
     return `
     <div class='elementwrapper'>
       <input type='${this.typeInput.type}' id='${this.elementId}' value='${this.value}' ${propsRules}></input>
-      <label for='${this.elementId}'>${this.label}</label>
+      <label for='${this.elementId}'>${mandatory} ${this.label}</label>
       <span class='tooltip' id="${PREFIXMESSAGE}${this.elementId}"></span>
     </div>
   `

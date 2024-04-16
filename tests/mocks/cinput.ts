@@ -10,7 +10,7 @@ export function createTextInputFake (): typeof InputJsonPropertiesMap {
       type: ComponentTypeEnum.TEXT,
       label: faker.lorem.word(),
       value: faker.lorem.word(),
-      required: faker.datatype.boolean()
+      mandatory: faker.datatype.boolean()
     }
   }
 }
@@ -22,7 +22,7 @@ export function createPasswordInputFake (): typeof InputJsonPropertiesMap {
       type: ComponentTypeEnum.PASSWORD,
       label: faker.lorem.word(),
       value: faker.lorem.word(),
-      required: faker.datatype.boolean()
+      mandatory: faker.datatype.boolean()
     }
   }
 }
@@ -34,7 +34,7 @@ export function createEmailInputFake (): typeof InputJsonPropertiesMap {
       type: ComponentTypeEnum.EMAIL,
       label: faker.lorem.word(),
       value: faker.internet.email(),
-      required: faker.datatype.boolean()
+      mandatory: faker.datatype.boolean()
     }
   }
 }

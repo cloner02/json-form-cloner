@@ -23,19 +23,19 @@ This simple example below creates a form with two inputs, one for entering text 
             "type": "text",
             "label": "User Name",
             "value": "Juan",
-            "required": true
+            "mandatory": true
           },
           "password": {
             "type": "password",
             "label": "Password",
             "value": "MyPassword",
-            "required": true
+            "mandatory": true
           },
           "email": {
             "type": "email",
             "label": "Email",
             "value": "myEmail@ggmail.com",
-            "required": true
+            "mandatory": true
           },
           "submit": {
             "type": "button",

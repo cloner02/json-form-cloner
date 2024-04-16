@@ -22,8 +22,8 @@ function getComponentEmailInput (args: InputJsonPropertiesWithBaseProperties): C
 }
 
 function getComponentInput (args: InputJsonPropertiesWithBaseProperties, typeInput: ITypeInput): CBase {
-  const { value, elementId, label = '' } = args
-  return new CInput(value, elementId, label, typeInput)
+  const { value, elementId, label = '', mandatory = false } = args
+  return new CInput(value, elementId, label, mandatory, typeInput)
 }
 
 export { getComponentTextInput, getComponentPasswordInput, getComponentEmailInput }

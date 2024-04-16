@@ -1,5 +1,5 @@
 import { type IBaseProperties } from '../components/cbase/type/index'
-import { type IRules } from '../components/cinput/type/index'
+import { type ITypeInput } from '../components/cinput/type/index'
 import { type IDynamicBaseProperties } from '../components/cstaticbase/type/index'
 
 export const ComponentTypeEnum = Object.freeze({
@@ -19,15 +19,14 @@ export interface IActions {
   actions?: IActionProperty[]
 }
 
-export interface InputJsonProperties {
-  required: boolean
-  rules?: IRules
+export interface IMandatory {
+  mandatory: boolean
 }
 
-export interface InputJsonPropertiesWithBaseProperties extends IBaseProperties, IDynamicBaseProperties, InputJsonProperties, IActions {
+export interface InputJsonPropertiesWithBaseProperties extends IBaseProperties, IDynamicBaseProperties, ITypeInput, IActions, IMandatory {
 }
 
-export interface BodyJsonProperties extends IBaseProperties, IDynamicBaseProperties, InputJsonProperties, IActions {
+export interface BodyJsonProperties extends IBaseProperties, IDynamicBaseProperties, ITypeInput, IActions, IMandatory {
   type: typeof ComponentTypeEnum[keyof typeof ComponentTypeEnum]
 }
 

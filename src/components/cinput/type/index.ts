@@ -1,11 +1,12 @@
+import { type IMandatory } from '../../../type/index'
 import { type IBaseProperties } from '../../cbase/type/index'
 
 interface ITypeInput {
   type: string
-  rules: IRules
+  rules?: IRules
 }
 
-interface IPropertiesInput extends IBaseProperties {
+interface IPropertiesInput extends IBaseProperties, IMandatory {
   typeInput: ITypeInput
   inputEvent: () => void
   onBlurEvent: () => void
