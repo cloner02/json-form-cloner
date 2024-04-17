@@ -1,9 +1,9 @@
 import { type CBase } from '../../components/cbase/cbase'
-import { type IRules } from '../../components/cinput/type/index'
+import { type IRulesBase } from '../../components/cinput/type/index'
 import { ruleList } from './list'
 
-export function ruleMsg (getRules: (instance: any) => IRules): MethodDecorator {
-  function msgErrorRules (element: CBase, rules: IRules): string | null {
+export function ruleMsg (getRules: (instance: any) => IRulesBase): MethodDecorator {
+  function msgErrorRules (element: CBase, rules: IRulesBase): string | null {
     const rule = ruleList.find((rule) => rule.condition(rules, element))
     return (rule != null) ? rule.message(rules) : null
   }

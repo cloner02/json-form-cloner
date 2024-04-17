@@ -14,17 +14,16 @@ export class CButton extends CBase implements IActions {
     super(elementId, label)
     this.actions = actions
     this._buttonElement = null as unknown as HTMLButtonElement
-    this.setAttribute('slot', BUTTON_SLOT as string)
   }
 
   clickEvent (): void {
     this._buttonElement.addEventListener('click', () => {
       this.actionCallback()
-      // console.log('checkFields', this.checkFields())
     })
   }
 
   connectedCallback (): void {
+    this.setAttribute('slot', BUTTON_SLOT as string)
     super.connectedCallback()
     this._buttonElement = this.shadowRoot?.querySelector('button') as Element as HTMLButtonElement
     this.clickEvent()

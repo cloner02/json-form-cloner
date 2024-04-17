@@ -1,23 +1,32 @@
 import { ELEMENT_SLOT, PREFIXMESSAGE } from '../../constants/index'
 import { ruleMsg } from '../../decorators/rules/index'
-import { CDynamicBase } from '../cstaticbase/cstaticbase'
-import { type ITypeInput, type IPropertiesInput } from './type/index'
+import { CDynamicBase } from '../cdynamicbase/cdynamicbase'
+import { type ITypeInput, type IPropertiesInput, type IRulesBase } from './type/index'
 import style from './../../template/cInput/cinput.css'
 import handlers from './handler/index'
 import { debounce } from '../../utils/index'
 import { mandatoryMsg } from '../../decorators/mandatory'
+import { INPUTSUBCOMPONENT_ENUM } from './enum/index'
+import { TextInput } from './subcomponents/text/index'
 
 export class CInput extends CDynamicBase implements IPropertiesInput {
-  typeInput: ITypeInput
+  typeInput: ITypeInput = new TextInput({})
   mandatory: boolean
+  type: string
   private _inputElement: HTMLInputElement
 
-  constructor (value: any, elementId: string, label: string, mandatory: boolean, typeInput: ITypeInput) {
+  static observedAttributes = ['value', 'type', 'rules', 'mandatory', 'label']
+
+  constructor (value: any, type: string, elementId: string, label: string, mandatory: boolean, rules: IRulesBase) {
     super(value, elementId, label)
     this.mandatory = mandatory
+    this.type = type
     this._inputElement = null as unknown as HTMLInputElement
-    this.typeInput = typeInput
-    this.setAttribute('slot', ELEMENT_SLOT as string)
+    this.typeInput = { rules }
+    if (type in INPUTSUBCOMPONENT_ENUM) {
+      const keyOfTypeOfElement = type as keyof typeof INPUTSUBCOMPONENT_ENUM
+      this.typeInput = new INPUTSUBCOMPONENT_ENUM[keyOfTypeOfElement](...[rules])
+    }
   }
 
   inputEvent (): void {
@@ -33,8 +42,10 @@ export class CInput extends CDynamicBase implements IPropertiesInput {
   }
 
   connectedCallback (): void {
+    this.setAttribute('slot', ELEMENT_SLOT as string)
     super.connectedCallback()
     this._inputElement = this.shadowRoot?.querySelector('input') as Element as HTMLInputElement
+    // this.value = this.attributes.getNamedItem('value')?.value ?? this.value
     this.inputEvent()
     this.onBlurEvent()
   }
@@ -54,7 +65,7 @@ export class CInput extends CDynamicBase implements IPropertiesInput {
       .join(' ')
     return `
     <div class='elementwrapper'>
-      <input type='${this.typeInput.type}' id='${this.elementId}' value='${this.value}' ${propsRules}></input>
+      <input type='${this.type}' id='${this.elementId}' value='${this.value}' ${propsRules}></input>
       <label for='${this.elementId}'>${mandatory} ${this.label}</label>
       <span class='tooltip' id="${PREFIXMESSAGE}${this.elementId}"></span>
     </div>

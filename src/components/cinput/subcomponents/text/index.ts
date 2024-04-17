@@ -1,10 +1,9 @@
-import { type IRules, type ITypeInput } from '../../type/index'
+import { type IRulesBase, type ITypeInput } from '../../type/index'
 
 class TextInput implements ITypeInput {
-  rules: IRules = {}
-  type: string = 'text'
+  rules: IRulesBase = {}
 
-  constructor (rules?: IRules) {
+  constructor (rules?: IRulesBase) {
     this.rules = rules ?? {}
   }
 }

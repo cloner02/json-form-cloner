@@ -4,7 +4,7 @@ import { type IPropertiesForm } from './type/index'
 import { Utils } from '../../decorators/utils'
 import FormsCollection from '../../singleton/formsCollection'
 import { VALUECHANGEDEVENT } from '../../constants/index'
-import { CDynamicBase } from '../cstaticbase/cstaticbase'
+import { CDynamicBase } from '../cdynamicbase/cdynamicbase'
 import handlers from './handler/index'
 
 @Utils()

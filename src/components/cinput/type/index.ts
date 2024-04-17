@@ -1,27 +1,28 @@
-import { type IMandatory } from '../../../type/index'
+import { type IType, type IMandatory } from '../../../type/index'
 import { type IBaseProperties } from '../../cbase/type/index'
 
-interface ITypeInput {
-  type: string
-  rules?: IRules
+interface ITypeInput extends IRules {
+}
+interface IRules {
+  rules?: IRulesBase
 }
 
-interface IPropertiesInput extends IBaseProperties, IMandatory {
+interface IPropertiesInput extends IBaseProperties, IMandatory, IType, IRules {
   typeInput: ITypeInput
   inputEvent: () => void
   onBlurEvent: () => void
 }
 
-interface IRules {
+interface IRulesBase {
   minlength?: number
   maxlength?: number
   pattern?: string
   conditional?: (value: string) => boolean
 }
 
-interface IRulesRange extends IRules {
+interface IRulesRange extends IRulesBase {
   max?: number
   min?: number
 }
 
-export { type ITypeInput, type IPropertiesInput, type IRules, type IRulesRange }
+export { type ITypeInput, type IPropertiesInput, type IRulesBase, type IRulesRange }

@@ -1,5 +1,5 @@
 import { CInput } from '../components/cinput/cinput'
-import { type CDynamicBase } from '../components/cstaticbase/cstaticbase'
+import { type CDynamicBase } from '../components/cdynamicbase/cdynamicbase'
 
 export function mandatoryMsg (getElement: (instance: any) => CDynamicBase): MethodDecorator {
   return function (target: any, propertyKey: string | symbol, descriptor: PropertyDescriptor) {

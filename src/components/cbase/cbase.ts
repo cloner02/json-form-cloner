@@ -36,10 +36,12 @@ export abstract class CBase extends HTMLElement implements IBaseProperties {
   }
 
   applyAttributesToProperties (): void {
-    const listProperties: string[] = Object.getOwnPropertyNames(this)
+    const listProperties = Object.getOwnPropertyNames(this).filter(name => typeof this[name] !== 'function')
     listProperties.forEach((property: string) => {
       const attributeValue = this.attributes.getNamedItem(property)?.value
-      if (attributeValue !== undefined) { this[property] = attributeValue }
+      if (attributeValue !== undefined) {
+        this[property] = attributeValue
+      }
     })
     /**
      * Id overwrites elementId if both are present or elementid is undefined

@@ -1,6 +1,5 @@
 import { PREFIXMESSAGE } from '../../constants/index'
 import { valueChangedEvent } from '../../events/index'
-import { EmptyIdException } from '../../exceptions/index'
 import { CBase } from '../cbase/cbase'
 import { type IDynamicBaseProperties } from './type/index'
 
@@ -28,20 +27,7 @@ export abstract class CDynamicBase extends CBase implements IDynamicBaseProperti
   }
 
   applyAttributesToProperties (): void {
-    const listProperties: string[] = Object.getOwnPropertyNames(this)
-    listProperties.forEach((property: string) => {
-      const attributeValue = this.attributes.getNamedItem(property)?.value
-      if (attributeValue !== undefined) { this[property] = attributeValue }
-    })
-    /**
-     * Id overwrites elementId if both are present or elementid is undefined
-    */
-    const idPriority = (this.id !== undefined && this.id.length > 0) ? this.id : this.elementId
-
-    if (idPriority === undefined) { throw new EmptyIdException() }
-
-    this.id = idPriority
-    this.elementId = idPriority
+    super.applyAttributesToProperties()
   }
 
   connectedCallback (): void {
@@ -50,6 +36,7 @@ export abstract class CDynamicBase extends CBase implements IDynamicBaseProperti
 
   attributeChangedCallback (name: any, oldValue: any, newValue: any): void {
     if (name === 'value') {
+      this.value = newValue
       this.dispatchEvent(valueChangedEvent({
         name,
         newValue,
@@ -62,6 +49,7 @@ export abstract class CDynamicBase extends CBase implements IDynamicBaseProperti
   async propertyChangedCallback (name: any, oldValue: any, newValue: any): Promise<void> {
     await super.propertyChangedCallback(name, oldValue, newValue)
     if (name === 'value') {
+      this.value = newValue
       this.dispatchEvent(valueChangedEvent({
         name,
         newValue,
