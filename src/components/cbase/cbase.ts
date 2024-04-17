@@ -71,6 +71,9 @@ export abstract class CBase extends HTMLElement implements IBaseProperties {
   }
 
   render (): void {
+    while ((this.shadowRoot?.firstChild) != null) {
+      this.shadowRoot.firstChild.remove()
+    }
     this.shadowRoot?.append(document.importNode(this.template().content, true))
   }
 }

@@ -35,6 +35,7 @@ export abstract class CDynamicBase extends CBase implements IDynamicBaseProperti
   }
 
   attributeChangedCallback (name: any, oldValue: any, newValue: any): void {
+    super.attributeChangedCallback(name, oldValue, newValue)
     if (name === 'value') {
       this.value = newValue
       this.dispatchEvent(valueChangedEvent({
@@ -44,6 +45,7 @@ export abstract class CDynamicBase extends CBase implements IDynamicBaseProperti
         elementId: this.elementId
       }))
     }
+    super.render()
   }
 
   async propertyChangedCallback (name: any, oldValue: any, newValue: any): Promise<void> {
