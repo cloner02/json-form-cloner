@@ -5,7 +5,8 @@ Create forms from a Json
 
 ## Getting started
 
-This simple example below creates a form with two inputs, one for entering text and another one for entering a password
+This simple example below creates a form with three inputs, one for entering text, another for entering a password, and the last one for entering an email.
+There is also a button when you click on it, which will display a popup window (alert) where the values of username and password fields are displayed.
 
 ```html
 <!DOCTYPE html>
@@ -17,40 +18,42 @@ This simple example below creates a form with two inputs, one for entering text 
   <title>TypeScript Web Component</title>
 </head>
 <script src="../dist-webpack/bundle.js"></script>
-<body>
-    <c-form id="login" bodyjson='{
-        "username": {
-            "type": "text",
-            "label": "User Name",
-            "value": "Juan",
-            "mandatory": true
-          },
-          "password": {
-            "type": "password",
-            "label": "Password",
-            "value": "MyPassword",
-            "mandatory": true
-          },
-          "email": {
-            "type": "email",
-            "label": "Email",
-            "value": "myEmail@ggmail.com",
-            "mandatory": true
-          },
-          "submit": {
-            "type": "button",
-            "label": "Submit",
-            "actions": [{
-              "methodname": "example",
-              "parameters": {
-                "username": "${username}",
-                "password": "${password}",
-                "email": "email"
-              }
-            }]
-          }
-        }'
-    ></c-form>
+<body style="margin: 0;padding: 0;">
+    <div class="wrapper" style="height:100vh">
+      <c-form id="login" bodyjson='{
+          "username": {
+              "type": "text",
+              "label": "User Name",
+              "value": "Juan",
+              "mandatory": false
+            },
+            "password": {
+              "type": "password",
+              "label": "Password",
+              "value": "MyPassword",
+              "mandatory": true
+            },
+            "email": {
+              "type": "email",
+              "label": "Email",
+              "value": "myEmail@ggmail.com",
+              "mandatory": true
+            },
+            "submit": {
+              "type": "button",
+              "label": "Submit",
+              "actions": [{
+                "methodname": "example",
+                "parameters": {
+                  "username": "${username}",
+                  "password": "${password}",
+                  "email": "email"
+                }
+              }]
+            }
+          }'
+      ></c-form>
+    </div>
 </body>
 <script>
    const appController = new AppController();
