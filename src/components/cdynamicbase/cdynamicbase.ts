@@ -1,6 +1,6 @@
 import { PREFIXMESSAGE } from '../../constants/index'
-import { valueChangedEvent } from '../../events/index'
 import { CBase } from '../cbase/cbase'
+import handlers from './handler/index'
 import { type IDynamicBaseProperties } from './type/index'
 
 export abstract class CDynamicBase extends CBase implements IDynamicBaseProperties {
@@ -36,28 +36,17 @@ export abstract class CDynamicBase extends CBase implements IDynamicBaseProperti
 
   attributeChangedCallback (name: any, oldValue: any, newValue: any): void {
     super.attributeChangedCallback(name, oldValue, newValue)
-    if (name === 'value') {
-      this.value = newValue
-      this.dispatchEvent(valueChangedEvent({
-        name,
-        newValue,
-        oldValue,
-        elementId: this.elementId
-      }))
+    if (handlers[name] !== undefined) {
+      handlers[name]({ element: this, name, newValue, oldValue })
     }
-    super.render()
+    this.render()
   }
 
   async propertyChangedCallback (name: any, oldValue: any, newValue: any): Promise<void> {
     await super.propertyChangedCallback(name, oldValue, newValue)
-    if (name === 'value') {
-      this.value = newValue
-      this.dispatchEvent(valueChangedEvent({
-        name,
-        newValue,
-        oldValue,
-        elementId: this.elementId
-      }))
+
+    if (handlers[name] !== undefined) {
+      handlers[name]({ element: this, name, newValue, oldValue })
     }
   }
 

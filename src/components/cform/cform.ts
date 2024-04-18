@@ -72,21 +72,22 @@ export class CForm extends CDynamicBase implements IPropertiesForm {
     super.connectedCallback()
     this._form = this.shadowRoot?.querySelector('form') as Element as HTMLFormElement
     this._isConnected = true
-    handlers.bodyjson(this, this.bodyjson)
+    handlers.bodyjson({ element: this, newValue: this.bodyjson })
+
     this.getValuesFromChildren()
   }
 
   attributeChangedCallback (name: any, oldValue: any, newValue: any): void {
     super.attributeChangedCallback(name, oldValue, newValue)
     if (handlers[name] !== undefined && this._isConnected) {
-      handlers[name](this, newValue, oldValue)
+      handlers[name]({ element: this, newValue, oldValue })
     }
   }
 
   async propertyChangedCallback (name: any, oldValue: any, newValue: any): Promise<void> {
     await super.propertyChangedCallback(name, oldValue, newValue)
     if (handlers[name] !== undefined) {
-      handlers[name](this, newValue, oldValue)
+      handlers[name]({ element: this, newValue, oldValue })
     }
   }
 
