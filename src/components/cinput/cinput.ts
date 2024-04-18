@@ -45,15 +45,14 @@ export class CInput extends CDynamicBase implements IPropertiesInput {
     this.setAttribute('slot', ELEMENT_SLOT as string)
     super.connectedCallback()
     this._inputElement = this.shadowRoot?.querySelector('input') as Element as HTMLInputElement
-    // this.value = this.attributes.getNamedItem('value')?.value ?? this.value
     this.inputEvent()
     this.onBlurEvent()
   }
 
   async propertyChangedCallback (name: string, oldValue: any, newValue: any): Promise<void> {
     await super.propertyChangedCallback(name, oldValue, newValue)
-    if (handlers[name] !== undefined) {
-      handlers[name](this, newValue, oldValue)
+    if (handlers[name] !== undefined && oldValue !== newValue) {
+      handlers[name]({ element: this, newValue, oldValue })
     }
   }
 

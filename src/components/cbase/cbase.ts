@@ -1,10 +1,24 @@
 import { EmptyIdException } from '../../exceptions/index'
+import handlers from './handler/index'
 import { type IBaseProperties } from './type/index'
 
 export abstract class CBase extends HTMLElement implements IBaseProperties {
   [key: string]: any; // Add index signature to allow indexing with a string parameter
-  label: string
   elementId: string
+
+  protected _label: any
+
+  get label (): string {
+    return this._label
+  }
+
+  set label (newValue: string) {
+    const oldValue = this._label
+    if (oldValue !== newValue) {
+      this._label = newValue
+      void this.propertyChangedCallback('label', oldValue, newValue)
+    }
+  }
 
   private readonly connectedPromise: Promise<void> | undefined
   private resolveConnectedPromise!: () => void
@@ -64,10 +78,16 @@ export abstract class CBase extends HTMLElement implements IBaseProperties {
   }
 
   attributeChangedCallback (name: any, oldValue: any, newValue: any): void {
+    if (handlers[name] !== undefined && oldValue !== newValue) {
+      handlers[name]({ element: this, name, newValue, oldValue })
+    }
   }
 
   async propertyChangedCallback (name: any, oldValue: any, newValue: any): Promise<void> {
     await this.connectedPromise
+    if (handlers[name] !== undefined && oldValue !== newValue) {
+      handlers[name]({ element: this, name, newValue, oldValue })
+    }
   }
 
   render (): void {

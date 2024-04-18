@@ -8,8 +8,8 @@ function valueHandler (args: Record<string, unknown>): void {
     newValue: any
     oldValue: any
   }
-  (element).value = newValue;
-  (element).dispatchEvent(
+  element.value = newValue
+  element.dispatchEvent(
     valueChangedEvent({
       name,
       newValue,
@@ -19,4 +19,4 @@ function valueHandler (args: Record<string, unknown>): void {
   )
 }
 
-export default { valueHandler }
+export default { value: valueHandler }
