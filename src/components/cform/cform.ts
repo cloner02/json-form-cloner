@@ -15,11 +15,11 @@ export class CForm extends CDynamicBase implements IPropertiesForm {
 
   static observedAttributes = ['value', 'bodyjson']
 
-  constructor (value: object, elementId: string) {
+  constructor (value: object, elementId: string, bodyjson: string = '{}') {
     super(value, elementId)
     this.value = value ?? {}
     this._form = null as unknown as HTMLFormElement
-    this.bodyjson = '{}'
+    this.bodyjson = bodyjson
     FormsCollection.put(this)
   }
 
@@ -72,6 +72,7 @@ export class CForm extends CDynamicBase implements IPropertiesForm {
     super.connectedCallback()
     this._form = this.shadowRoot?.querySelector('form') as Element as HTMLFormElement
     this._isConnected = true
+    console.log('connectedCallback', this.bodyjson)
     handlers.bodyjson({ element: this, newValue: this.bodyjson })
 
     this.getValuesFromChildren()
@@ -79,14 +80,14 @@ export class CForm extends CDynamicBase implements IPropertiesForm {
 
   attributeChangedCallback (name: any, oldValue: any, newValue: any): void {
     super.attributeChangedCallback(name, oldValue, newValue)
-    if (handlers[name] !== undefined && this._isConnected) {
+    if (handlers[name] !== undefined && this._isConnected && oldValue !== newValue) {
       handlers[name]({ element: this, newValue, oldValue })
     }
   }
 
   async propertyChangedCallback (name: any, oldValue: any, newValue: any): Promise<void> {
     await super.propertyChangedCallback(name, oldValue, newValue)
-    if (handlers[name] !== undefined) {
+    if (handlers[name] !== undefined && this._isConnected && oldValue !== newValue) {
       handlers[name]({ element: this, newValue, oldValue })
     }
   }

@@ -38,16 +38,17 @@ export function Utils (): ClassDecorator {
     target.prototype.renderBodyjson = function (json: string) {
       this.bodyJsonParse = JSON.parse(json) ?? {}
       const formWrapper = this as unknown as HTMLElement
-      for (const key in this.bodyJsonParse) {
-        if (this.bodyJsonParse[key] !== null) {
-          const typeOfElement = this.bodyJsonParse[key].type
-          const propertiesOfElement = this.bodyJsonParse[key] as BodyJsonProperties
-          propertiesOfElement.elementId = key
-          if (typeOfElement in COMPONENT_ENUM) {
-            const keyOfTypeOfElement = typeOfElement as keyof typeof COMPONENT_ENUM
-            const component: CBase = COMPONENT_ENUM[keyOfTypeOfElement](propertiesOfElement)
-            this.elementsOfForm.push(component)
-            if (formWrapper !== null) {
+      if (formWrapper !== null) {
+        formWrapper.innerHTML = ''
+        for (const key in this.bodyJsonParse) {
+          if (this.bodyJsonParse[key] !== null) {
+            const typeOfElement = this.bodyJsonParse[key].type
+            const propertiesOfElement = this.bodyJsonParse[key] as BodyJsonProperties
+            propertiesOfElement.elementId = key
+            if (typeOfElement in COMPONENT_ENUM) {
+              const keyOfTypeOfElement = typeOfElement as keyof typeof COMPONENT_ENUM
+              const component: CBase = COMPONENT_ENUM[keyOfTypeOfElement](propertiesOfElement)
+              this.elementsOfForm.push(component)
               formWrapper.appendChild(component)
             }
           }

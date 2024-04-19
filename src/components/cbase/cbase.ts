@@ -51,6 +51,8 @@ export abstract class CBase extends HTMLElement implements IBaseProperties {
 
   applyAttributesToProperties (): void {
     const listProperties = Object.getOwnPropertyNames(this).filter(name => typeof this[name] !== 'function')
+    console.log('listProperties', listProperties)
+    console.log('this.attributes', this.attributes)
     listProperties.forEach((property: string) => {
       const attributeValue = this.attributes.getNamedItem(property)?.value
       if (attributeValue !== undefined) {

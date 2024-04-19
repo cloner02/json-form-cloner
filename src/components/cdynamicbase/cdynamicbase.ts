@@ -22,7 +22,6 @@ export abstract class CDynamicBase extends CBase implements IDynamicBaseProperti
 
   constructor (value: any, elementId: string, label?: string) {
     super(elementId, label)
-    this.label = label ?? ''
     this.value = value
   }
 

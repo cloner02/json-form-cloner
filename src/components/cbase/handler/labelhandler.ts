@@ -6,7 +6,6 @@ function labelHandler (args: Record<string, unknown>): void {
     newValue: string
   }
   element.label = newValue
-  console.log('labelHandler0', element.label)
 }
 
 export default { label: labelHandler }
