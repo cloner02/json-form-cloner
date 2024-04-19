@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>TypeScript Web Component</title>
+</head>
+<script src="../dist-webpack/bundle.js"></script>
+<body style="margin: 0;padding: 0;">
+    <div class="wrapper" style="height:100vh">
+      <c-form id="other">
+        <c-input id="user name" type="text" label="Name" value="Juan"></c-input>
+      </c-form>
+    </div>
+</body>
+<script>
+   const appController = new AppController();
+   const methods = appController.methodCollection;
+   function example(password, email, username) {
+     alert(password + " " + email + " " + username);
+    }
+   methods.add([example]);
+   const formController = appController.getFormController("login");
+   //get Values from the form identified by the id "login"
+   let values = formController.getValues();
+   console.log(values);
+   //edit the values of the form called login in 5 seconds for you can see the changes. The username value will change of "Juan" to "Carlos"
+   setTimeout(function() {
+    values.username = "Carlos";
+    formController.setValues(values);
+    // get the values of the form after the edit
+    console.log(formController.getValues());
+  }, 5000);
+</script>
+</html>
