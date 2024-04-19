@@ -1,24 +1,14 @@
+import { handlerProperty } from '../../decorators/property'
 import { EmptyIdException } from '../../exceptions/index'
 import handlers from './handler/index'
 import { type IBaseProperties } from './type/index'
 
 export abstract class CBase extends HTMLElement implements IBaseProperties {
-  [key: string]: any; // Add index signature to allow indexing with a string parameter
+  [key: string]: any // Add index signature to allow indexing with a string parameter
   elementId: string
-
-  protected _label: any
-
-  get label (): string {
-    return this._label
-  }
-
-  set label (newValue: string) {
-    const oldValue = this._label
-    if (oldValue !== newValue) {
-      this._label = newValue
-      void this.propertyChangedCallback('label', oldValue, newValue)
-    }
-  }
+  protected _label: string | undefined
+  @handlerProperty
+    label: string
 
   private readonly connectedPromise: Promise<void> | undefined
   private resolveConnectedPromise!: () => void
@@ -50,9 +40,12 @@ export abstract class CBase extends HTMLElement implements IBaseProperties {
   }
 
   applyAttributesToProperties (): void {
-    const listProperties = Object.getOwnPropertyNames(this).filter(name => typeof this[name] !== 'function')
-    console.log('listProperties', listProperties)
-    console.log('this.attributes', this.attributes)
+    const listPrototypeProperties = Object.getOwnPropertyNames(Object.getPrototypeOf(this))
+    const listObjectProperties = Object.getOwnPropertyNames(this)
+    const mergedProperties = [...listPrototypeProperties, ...listObjectProperties]
+    const uniqueProperties = Array.from(new Set(mergedProperties))
+    const listProperties = uniqueProperties.filter(name => typeof this[name] !== 'function' && !name.startsWith('_'))
+
     listProperties.forEach((property: string) => {
       const attributeValue = this.attributes.getNamedItem(property)?.value
       if (attributeValue !== undefined) {
@@ -82,6 +75,9 @@ export abstract class CBase extends HTMLElement implements IBaseProperties {
   attributeChangedCallback (name: any, oldValue: any, newValue: any): void {
     if (handlers[name] !== undefined && oldValue !== newValue) {
       handlers[name]({ element: this, name, newValue, oldValue })
+    }
+    if (oldValue !== newValue && newValue !== undefined) {
+      this[name] = newValue
     }
   }
 

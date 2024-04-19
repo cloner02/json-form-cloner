@@ -1,4 +1,5 @@
 import { PREFIXMESSAGE } from '../../constants/index'
+import { handlerProperty } from '../../decorators/property'
 import { CBase } from '../cbase/cbase'
 import handlers from './handler/index'
 import { type IDynamicBaseProperties } from './type/index'
@@ -6,23 +7,14 @@ import { type IDynamicBaseProperties } from './type/index'
 export abstract class CDynamicBase extends CBase implements IDynamicBaseProperties {
   protected _value: any
 
-  get value (): any {
-    return this._value
-  }
-
-  set value (newValue: any) {
-    const oldValue = this._value
-    if (oldValue !== newValue) {
-      this._value = newValue
-      void this.propertyChangedCallback('value', oldValue, newValue)
-    }
-  }
+  @handlerProperty
+    value: any
 
   static observedAttributes = ['value']
 
   constructor (value: any, elementId: string, label?: string) {
     super(elementId, label)
-    this.value = value
+    if (value !== undefined) { this.value = value }
   }
 
   applyAttributesToProperties (): void {

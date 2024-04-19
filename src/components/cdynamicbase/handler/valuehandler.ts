@@ -8,7 +8,6 @@ function valueHandler (args: Record<string, unknown>): void {
     newValue: any
     oldValue: any
   }
-  element.value = newValue
   element.dispatchEvent(
     valueChangedEvent({
       name,

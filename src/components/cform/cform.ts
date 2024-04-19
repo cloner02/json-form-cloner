@@ -6,10 +6,14 @@ import FormsCollection from '../../singleton/formsCollection'
 import { VALUECHANGEDEVENT } from '../../constants/index'
 import { CDynamicBase } from '../cdynamicbase/cdynamicbase'
 import handlers from './handler/index'
+import { handlerProperty } from '../../decorators/property'
 
 @Utils()
 export class CForm extends CDynamicBase implements IPropertiesForm {
-  bodyjson: string
+  protected _bodyjson: string | undefined
+  @handlerProperty
+    bodyjson: string
+
   private _form: HTMLFormElement
   private _isConnected: boolean = false
 
@@ -30,7 +34,7 @@ export class CForm extends CDynamicBase implements IPropertiesForm {
   setValuesToChildren (): void {
     this.childNodes?.forEach((element: ChildNode) => {
       if (element instanceof CDynamicBase) {
-        if (element.value !== String(this.value[element.elementId])) {
+        if (element.value !== String(this.value[element.elementId]) && this.value[element.elementId] !== undefined) {
           element.value = this.value[element.elementId]
         }
       }
@@ -72,7 +76,6 @@ export class CForm extends CDynamicBase implements IPropertiesForm {
     super.connectedCallback()
     this._form = this.shadowRoot?.querySelector('form') as Element as HTMLFormElement
     this._isConnected = true
-    console.log('connectedCallback', this.bodyjson)
     handlers.bodyjson({ element: this, newValue: this.bodyjson })
 
     this.getValuesFromChildren()
