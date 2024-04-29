@@ -27,9 +27,6 @@ export abstract class CDynamicBase extends CBase implements IDynamicBaseProperti
 
   attributeChangedCallback (name: any, oldValue: any, newValue: any): void {
     super.attributeChangedCallback(name, oldValue, newValue)
-    if (handlers[name] !== undefined && oldValue !== newValue) {
-      handlers[name]({ element: this, name, newValue, oldValue })
-    }
   }
 
   async propertyChangedCallback (name: any, oldValue: any, newValue: any): Promise<void> {
