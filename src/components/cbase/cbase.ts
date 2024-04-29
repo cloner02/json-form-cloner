@@ -45,7 +45,6 @@ export abstract class CBase extends HTMLElement implements IBaseProperties {
     const mergedProperties = [...listPrototypeProperties, ...listObjectProperties]
     const uniqueProperties = Array.from(new Set(mergedProperties))
     const listProperties = uniqueProperties.filter(name => typeof this[name] !== 'function' && !name.startsWith('_'))
-
     listProperties.forEach((property: string) => {
       const attributeValue = this.attributes.getNamedItem(property)?.value
       if (attributeValue !== undefined) {
@@ -73,9 +72,9 @@ export abstract class CBase extends HTMLElement implements IBaseProperties {
   }
 
   attributeChangedCallback (name: any, oldValue: any, newValue: any): void {
-    if (handlers[name] !== undefined && oldValue !== newValue) {
+    /* if (handlers[name] !== undefined && oldValue !== newValue) {
       handlers[name]({ element: this, name, newValue, oldValue })
-    }
+    } */
     if (oldValue !== newValue && newValue !== undefined) {
       this[name] = newValue
     }

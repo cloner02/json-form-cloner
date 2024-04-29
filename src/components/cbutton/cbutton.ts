@@ -1,15 +1,23 @@
 import { BUTTON_SLOT } from '../../constants/index'
 import { Actions } from '../../decorators/actions'
 import { Check } from '../../decorators/check'
+import { handlerProperty } from '../../decorators/property'
 import { type IActions, type IActionProperty } from '../../type/index'
 import { CBase } from '../cbase/cbase'
 import style from './../../template/cButton/cbutton.css'
+import handlers from './handler/index'
 
 @Check()
 @Actions()
 export class CButton extends CBase implements IActions {
   private _buttonElement: HTMLButtonElement
-  actions: IActionProperty[] = []
+
+  protected _actions: IActionProperty[] = []
+  @handlerProperty
+    actions: IActionProperty[]
+
+  static observedAttributes = ['label', 'actions']
+
   constructor (elementId: string, label: string, actions: IActionProperty[] = []) {
     super(elementId, label)
     this.actions = actions
@@ -27,6 +35,13 @@ export class CButton extends CBase implements IActions {
     super.connectedCallback()
     this._buttonElement = this.shadowRoot?.querySelector('button') as Element as HTMLButtonElement
     this.clickEvent()
+  }
+
+  async propertyChangedCallback (name: string, oldValue: any, newValue: any): Promise<void> {
+    await super.propertyChangedCallback(name, oldValue, newValue)
+    if (handlers[name] !== undefined && oldValue !== newValue) {
+      handlers[name]({ element: this, newValue, oldValue })
+    }
   }
 
   html (): string {
