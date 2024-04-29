@@ -6,13 +6,16 @@ import style from './../../template/cInput/cinput.css'
 import handlers from './handler/index'
 import { debounce } from '../../utils/index'
 import { mandatoryMsg } from '../../decorators/mandatory'
-import { INPUTSUBCOMPONENT_ENUM } from './enum/index'
 import { TextInput } from './subcomponents/text/index'
+import { handlerProperty } from '../../decorators/property'
 
 export class CInput extends CDynamicBase implements IPropertiesInput {
   typeInput: ITypeInput = new TextInput({})
   mandatory: boolean
-  type: string
+  protected _type: string = 'text'
+  @handlerProperty
+    type: string
+
   private _inputElement: HTMLInputElement
 
   static observedAttributes = ['value', 'type', 'rules', 'mandatory', 'label']
@@ -23,10 +26,6 @@ export class CInput extends CDynamicBase implements IPropertiesInput {
     this.type = type
     this._inputElement = null as unknown as HTMLInputElement
     this.typeInput = { rules }
-    if (type in INPUTSUBCOMPONENT_ENUM) {
-      const keyOfTypeOfElement = type as keyof typeof INPUTSUBCOMPONENT_ENUM
-      this.typeInput = new INPUTSUBCOMPONENT_ENUM[keyOfTypeOfElement](...[rules])
-    }
   }
 
   inputEvent (): void {
