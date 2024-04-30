@@ -65,6 +65,7 @@ export class CForm extends CDynamicBase implements IPropertiesForm {
         if (elementsWithError !== null) {
           if (element.elementId in elementsWithError) {
             element.changeStyleToError()
+            element.showValidationMessage(undefined)
           }
         }
       }

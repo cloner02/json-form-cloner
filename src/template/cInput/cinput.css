@@ -14,9 +14,9 @@ input
 {
     color: #8a8a8a;
     display: block;
-    width: 90%;
+    width: calc(100% - 36px);
     height: 44px;
-    padding: 5px 5%;
+    padding: 5px 0px 5px 36px;
     border: 1px solid #ccc;
     border-radius: 8px;
     background-clip: padding-box;
@@ -28,7 +28,7 @@ input
 
 input:focus ~ label, label.top {
     top: 1px;
-    left: 5%;
+    left: 36px;
 }
 
 .tooltip {
@@ -40,7 +40,7 @@ input:focus ~ label, label.top {
     padding: 6px;
     position: sticky;
     display: block;
-    margin-left:5%;
+    margin-left: 36px;
     z-index: 1;
     visibility: hidden;
 }
@@ -61,7 +61,7 @@ label {
     position: absolute;
     color: #8a8a8a;
     top: 29px;
-    left: 5%;
+    left: 36px;
     background-color: #fff;
     font-family: 'HelveticaNeue', 'Arial', sans-serif;
 }
@@ -79,7 +79,7 @@ label {
 
 .icon-error {
     position: absolute;
-    left: 3%;
+    left: 18px;
     top: 20px;
     color: red;
     font-size: 24px;
