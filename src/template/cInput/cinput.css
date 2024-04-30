@@ -68,6 +68,24 @@ label {
 
 /* Error styles */
 
+.success input {
+    border: 1px solid green;
+    color: green;
+}
+
+.success label {
+    color: green;
+}
+
+.warning input {
+    border: 1px solid orange;
+    color: orange;
+}
+
+.warning label {
+    color: orange;
+}
+
 .error input {
     border: 1px solid red;
     color: red;
@@ -77,11 +95,26 @@ label {
     color: red;
 }
 
-.icon-error {
+.icon-status
+{
+    display: none;
     position: absolute;
     left: 18px;
     top: 20px;
-    color: red;
     font-size: 24px;
-    display: none;
+}
+
+.success .icon-status
+{
+    color: green;
+}
+
+.warning .icon-status
+{
+    color: orange;
+}
+
+.error .icon-status
+{
+    color: red;
 }

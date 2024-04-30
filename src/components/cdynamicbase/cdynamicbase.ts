@@ -1,8 +1,9 @@
 import { PREFIXMESSAGE } from '../../constants/index'
 import { handlerProperty } from '../../decorators/property'
 import { CBase } from '../cbase/cbase'
+import { STATUS_ENUM } from './enum/index'
 import handlers from './handler/index'
-import { type IDynamicBaseProperties } from './type/index'
+import { type IStatusIcon, type IDynamicBaseProperties, type IMessagesForm } from './type/index'
 
 export abstract class CDynamicBase extends CBase implements IDynamicBaseProperties {
   protected _value: any
@@ -37,19 +38,27 @@ export abstract class CDynamicBase extends CBase implements IDynamicBaseProperti
     }
   }
 
-  changeStyleToError (): void {
-    this.shadowRoot?.querySelector('.elementwrapper')?.classList.add('error')
-    const iconError = this.shadowRoot?.querySelector('.icon-error') as unknown as HTMLElement
+  changeStyleToStatus (status?: IStatusIcon | null): void {
+    this.removeStyleStatus()
+    status = status ?? this.getStatus()?.status ?? STATUS_ENUM.SUCCESS
+    this.shadowRoot?.querySelector('.elementwrapper')?.classList.add(status.name)
+    const iconError = this.shadowRoot?.querySelector('.icon-status') as unknown as HTMLElement
     if (iconError !== null) {
       iconError.style.display = 'block'
+      iconError.innerHTML = status.icon
     }
   }
 
-  removeStyleError (): void {
-    this.shadowRoot?.querySelector('.elementwrapper')?.classList.remove('error')
-    const iconError = this.shadowRoot?.querySelector('.icon-error') as unknown as HTMLElement
+  removeStyleStatus (): void {
+    const elementWrapper = this.shadowRoot?.querySelector('.elementwrapper') as unknown as HTMLElement
+
+    for (const key in STATUS_ENUM) {
+      elementWrapper.classList.remove(STATUS_ENUM[key].name)
+    }
+    const iconError = this.shadowRoot?.querySelector('.icon-status') as unknown as HTMLElement
     if (iconError !== null) {
       iconError.style.display = 'none'
+      iconError.innerHTML = ''
     }
   }
 
@@ -62,12 +71,24 @@ export abstract class CDynamicBase extends CBase implements IDynamicBaseProperti
     if (msgElement !== undefined && msgElement !== null) {
       msgElement.innerHTML = message ?? ''
     }
-    if (message === undefined || message === null || message === '') {
-      this.removeStyleError()
-    }
   }
 
   getMessageError (message?: string): string | null {
     return message ?? null
+  }
+
+  getStatus (): IMessagesForm | null {
+    let status: IMessagesForm | null = null
+    if ('mandatory' in this) {
+      const messageError = this.getMessageError(undefined)
+      const elementStatus = (messageError === null)
+        ? STATUS_ENUM.SUCCESS
+        : (messageError !== null && this.mandatory as boolean) ? STATUS_ENUM.ERROR : STATUS_ENUM.WARNING
+      status = {
+        status: elementStatus,
+        message: messageError
+      }
+    }
+    return status
   }
 }

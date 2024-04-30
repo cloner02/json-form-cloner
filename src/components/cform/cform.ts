@@ -7,6 +7,7 @@ import { VALUECHANGEDEVENT } from '../../constants/index'
 import { CDynamicBase } from '../cdynamicbase/cdynamicbase'
 import handlers from './handler/index'
 import { handlerProperty } from '../../decorators/property'
+import { type IMessagesForm } from '../cdynamicbase/type/index'
 
 @Utils()
 export class CForm extends CDynamicBase implements IPropertiesForm {
@@ -56,15 +57,16 @@ export class CForm extends CDynamicBase implements IPropertiesForm {
     })
   }
 
-  changeStyleToError (): void {
+  changeStyleToStatus (): void {
     const elementsWithError = this.checkFields()
     this.childNodes.forEach((node: ChildNode) => {
       if (node instanceof CDynamicBase) {
         const element = node
-        element.removeStyleError()
+        element.removeStyleStatus()
         if (elementsWithError !== null) {
           if (element.elementId in elementsWithError) {
-            element.changeStyleToError()
+            const status = elementsWithError[element.elementId].status
+            element.changeStyleToStatus(status)
             element.showValidationMessage(undefined)
           }
         }
@@ -72,16 +74,15 @@ export class CForm extends CDynamicBase implements IPropertiesForm {
     })
   }
 
-  checkFields (): Record<string, string> | null {
-    const listMessages: Record<string, string> = {}
+  checkFields (): Record<string, IMessagesForm> | null {
+    const listMessages: Record<string, IMessagesForm> = {}
     this.childNodes.forEach((node: ChildNode) => {
       const element = node as CDynamicBase
-      if ('mandatory' in element) {
-        if (element.mandatory as boolean) {
-          const messageError = element.getMessageError(undefined)
-          if (messageError !== null) {
-            listMessages[element.elementId] = messageError
-          }
+
+      if (node instanceof CDynamicBase) {
+        const status = element.getStatus()
+        if (status !== null) {
+          listMessages[element.elementId] = status
         }
       }
     })

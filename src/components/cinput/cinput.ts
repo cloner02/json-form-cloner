@@ -35,7 +35,10 @@ export class CInput extends CDynamicBase implements IPropertiesInput {
     this._inputElement.addEventListener('input', (event: Event) => {
       const target = event.target as HTMLInputElement
       this.value = target.value
-      debounce(() => { this.showValidationMessage(undefined) }, 500)
+      debounce(() => {
+        this.showValidationMessage(undefined)
+        this.removeStyleStatus()
+      }, 500)
     })
   }
 
@@ -67,7 +70,7 @@ export class CInput extends CDynamicBase implements IPropertiesInput {
     return `
     <div class='elementwrapper'>
       <input type='${this.type}' id='${this.elementId}' value='${this.value}' ${propsRules}></input>
-      <span class='icon-error'>&#9888;</span>
+      <span class='icon-status'></span>
       <label for='${this.elementId}'>${mandatory} ${this.label}</label>
       <span class='tooltip' id="${PREFIXMESSAGE}${this.elementId}"></span>
     </div>
