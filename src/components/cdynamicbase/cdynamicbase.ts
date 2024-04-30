@@ -42,10 +42,10 @@ export abstract class CDynamicBase extends CBase implements IDynamicBaseProperti
     this.removeStyleStatus()
     status = status ?? this.getStatus()?.status ?? STATUS_ENUM.SUCCESS
     this.shadowRoot?.querySelector('.elementwrapper')?.classList.add(status.name)
-    const iconError = this.shadowRoot?.querySelector('.icon-status') as unknown as HTMLElement
-    if (iconError !== null) {
-      iconError.style.display = 'block'
-      iconError.innerHTML = status.icon
+    const iconStatus = this.shadowRoot?.querySelector('.icon-status') as unknown as HTMLElement
+    if (iconStatus !== null) {
+      iconStatus.style.display = 'block'
+      iconStatus.innerHTML = status.icon
     }
   }
 
@@ -55,10 +55,10 @@ export abstract class CDynamicBase extends CBase implements IDynamicBaseProperti
     for (const key in STATUS_ENUM) {
       elementWrapper.classList.remove(STATUS_ENUM[key].name)
     }
-    const iconError = this.shadowRoot?.querySelector('.icon-status') as unknown as HTMLElement
-    if (iconError !== null) {
-      iconError.style.display = 'none'
-      iconError.innerHTML = ''
+    const iconStatus = this.shadowRoot?.querySelector('.icon-status') as unknown as HTMLElement
+    if (iconStatus !== null) {
+      iconStatus.style.display = 'none'
+      iconStatus.innerHTML = ''
     }
   }
 
