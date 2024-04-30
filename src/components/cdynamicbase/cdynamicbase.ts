@@ -37,6 +37,22 @@ export abstract class CDynamicBase extends CBase implements IDynamicBaseProperti
     }
   }
 
+  changeStyleToError (): void {
+    this.shadowRoot?.querySelector('.elementwrapper')?.classList.add('error')
+    const iconError = this.shadowRoot?.querySelector('.icon-error') as unknown as HTMLElement
+    if (iconError !== null) {
+      iconError.style.display = 'block'
+    }
+  }
+
+  removeStyleError (): void {
+    this.shadowRoot?.querySelector('.elementwrapper')?.classList.remove('error')
+    const iconError = this.shadowRoot?.querySelector('.icon-error') as unknown as HTMLElement
+    if (iconError !== null) {
+      iconError.style.display = 'none'
+    }
+  }
+
   render (): void {
     super.render()
   }
@@ -45,6 +61,9 @@ export abstract class CDynamicBase extends CBase implements IDynamicBaseProperti
     const msgElement = this.shadowRoot?.querySelector(`#${PREFIXMESSAGE}${this.elementId}`)
     if (msgElement !== undefined && msgElement !== null) {
       msgElement.innerHTML = message ?? ''
+    }
+    if (message === undefined || message === null || message === '') {
+      this.removeStyleError()
     }
   }
 

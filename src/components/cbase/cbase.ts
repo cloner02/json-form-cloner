@@ -82,7 +82,6 @@ export abstract class CBase extends HTMLElement implements IBaseProperties {
   }
 
   slotChangeCallback (event: Event): void {
-    console.log('slotChangeCallback', event)
   }
 
   async propertyChangedCallback (name: any, oldValue: any, newValue: any): Promise<void> {

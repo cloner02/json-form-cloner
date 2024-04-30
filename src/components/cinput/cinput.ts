@@ -11,10 +11,13 @@ import { handlerProperty } from '../../decorators/property'
 
 export class CInput extends CDynamicBase implements IPropertiesInput {
   typeInput: ITypeInput = new TextInput({})
-  mandatory: boolean
   protected _type: string = 'text'
+  protected _mandatory: boolean = false
   @handlerProperty
     type: string
+
+  @handlerProperty
+    mandatory: boolean
 
   private _inputElement: HTMLInputElement
 
@@ -64,6 +67,7 @@ export class CInput extends CDynamicBase implements IPropertiesInput {
     return `
     <div class='elementwrapper'>
       <input type='${this.type}' id='${this.elementId}' value='${this.value}' ${propsRules}></input>
+      <span class='icon-error'>&#9888;</span>
       <label for='${this.elementId}'>${mandatory} ${this.label}</label>
       <span class='tooltip' id="${PREFIXMESSAGE}${this.elementId}"></span>
     </div>

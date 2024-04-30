@@ -26,6 +26,8 @@ export class CButton extends CBase implements IActions {
 
   clickEvent (): void {
     this._buttonElement.addEventListener('click', () => {
+      // this.checkFields()
+      this.changeStyleToErrorInForm()
       this.actionCallback()
     })
   }

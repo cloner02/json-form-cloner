@@ -8,5 +8,9 @@ export function Check (): ClassDecorator {
       const checkFields = form?.checkFields()
       return checkFields
     }
+    target.prototype.changeStyleToErrorInForm = function (): void {
+      const form: CForm = getParentForm(this as HTMLElement as CForm)
+      form?.changeStyleToError()
+    }
   }
 }

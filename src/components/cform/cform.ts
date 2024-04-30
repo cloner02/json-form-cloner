@@ -56,6 +56,21 @@ export class CForm extends CDynamicBase implements IPropertiesForm {
     })
   }
 
+  changeStyleToError (): void {
+    const elementsWithError = this.checkFields()
+    this.childNodes.forEach((node: ChildNode) => {
+      if (node instanceof CDynamicBase) {
+        const element = node
+        element.removeStyleError()
+        if (elementsWithError !== null) {
+          if (element.elementId in elementsWithError) {
+            element.changeStyleToError()
+          }
+        }
+      }
+    })
+  }
+
   checkFields (): Record<string, string> | null {
     const listMessages: Record<string, string> = {}
     this.childNodes.forEach((node: ChildNode) => {
