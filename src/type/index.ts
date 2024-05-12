@@ -34,7 +34,7 @@ export interface BodyJsonProperties extends IBaseProperties, IDynamicBasePropert
   type: typeof ComponentTypeEnum[keyof typeof ComponentTypeEnum]
 }
 
-export interface ButtonJsonPropertiesWithBaseProperties extends IBaseProperties, IActions {
+export interface ButtonJsonPropertiesWithBaseProperties extends IBaseProperties, IActions, IType {
 }
 
 export type InputJsonPropertiesMap = Record<string, InputJsonPropertiesWithBaseProperties>

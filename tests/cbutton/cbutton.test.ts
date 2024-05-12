@@ -1,8 +1,6 @@
-import { createButtonFakeToJson } from '../mocks/cbutton'
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { CBUTTON_TAG, CFORM_TAG } = require('../../src/constants')
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { getPropertyValueFromJson } = require('json-form-cloner')
+import { createButtonFakeToJson } from '../../tests/mocks/cbutton'
+import { getPropertyValueFromJson } from 'json-form-cloner'
+import { CBUTTON_TAG, CFORM_TAG } from '../../src/constants'
 
 afterEach(() => {
   document.body.innerHTML = ''

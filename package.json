@@ -1,7 +1,7 @@
 {
   "name": "json-form-cloner",
   "version": "0.1.8",
-  "type": "commonjs",
+  "type": "module",
   "description": "Create forms from a property type of Json or with web components",
   "keywords": [
     "json",
@@ -19,14 +19,14 @@
   "scripts": {
     "clean": "node tools/clean.mjs",
     "copy-filesToDist-node": "node tools/copyfiles.mjs --source ./src/template --destination ./dist-node/template",
-    "build-node": "npx tsc --outDir dist-node --module CommonJS",
+    "build-node": "npx tsc --outDir dist-node --module ES6",
     "build": "npm run clean && npm run copy-filesToDist-node && npm run build-node",
     "build:prod": "npm run clean && npm run copy-filesToDist-node && npm run build-node && npm run build-webpack-prod",
     "build:dev": "npm run clean && npm run copy-filesToDist-node && npm run build-node && npm run build-webpack-dev",
-    "build-webpack-prod": "npx webpack --config webpack.config.js --mode production",
-    "build-webpack-dev": "npx webpack --config webpack.config.js --mode development",
+    "build-webpack-prod": "npx webpack --config webpack.config.cjs --mode production",
+    "build-webpack-dev": "npx webpack --config webpack.config.cjs --mode development",
     "watch:dev": "nodemon --config nodemon.json",
-    "test": "jest"
+    "test": "NODE_OPTIONS=--trace-deprecation node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.config.ts"
   },
   "author": {
     "name": "Miguel Guevara",
@@ -35,10 +35,10 @@
   "license": "MIT",
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
-    "@types/jest": "^29.5.11",
+    "@types/jest": "^29.5.12",
     "@typescript-eslint/eslint-plugin": "^6.20.0",
     "css-loader": "^6.10.0",
-    "eslint": "^8.56.0",
+    "eslint": "^8.57.0",
     "eslint-config-standard-with-typescript": "^43.0.1",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-n": "^16.6.2",
@@ -53,7 +53,7 @@
     "prettier": "^3.2.5",
     "raw-loader": "^4.0.2",
     "style-loader": "^3.3.4",
-    "ts-jest": "^29.1.1",
+    "ts-jest": "^29.1.2",
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3",
