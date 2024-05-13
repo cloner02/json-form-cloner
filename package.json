@@ -26,7 +26,7 @@
     "build-webpack-prod": "npx webpack --config webpack.config.cjs --mode production",
     "build-webpack-dev": "npx webpack --config webpack.config.cjs --mode development",
     "watch:dev": "nodemon --config nodemon.json",
-    "test": "cross-env NODE_OPTIONS=--trace-deprecation node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.config.ts"
+    "test": "cross-env NODE_ENV=development NODE_OPTIONS=--trace-deprecation node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.config.ts"
   },
   "author": {
     "name": "Miguel Guevara",

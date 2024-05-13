@@ -20,7 +20,7 @@ jobs:
           node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
       - name: Install packages
-        run: npm install
+        run: npm ci
       - name: Build the application
         run: npm run build:dev
       - name: Test the application
