@@ -1,7 +1,7 @@
 export default {
   extensionsToTreatAsEsm: ['.ts'],
   testEnvironment: 'jsdom',
-  setupFiles: ['./dist-node/index.js'],
+  setupFiles: ['./dist/index.js'],
   verbose: true,
   preset: 'ts-jest',
   transform: {

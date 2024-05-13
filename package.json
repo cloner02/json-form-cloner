@@ -1,6 +1,6 @@
 {
   "name": "json-form-cloner",
-  "version": "0.1.8",
+  "version": "0.1.8b",
   "type": "module",
   "description": "Create forms from a property type of Json or with web components",
   "keywords": [
@@ -9,7 +9,7 @@
     "web",
     "components"
   ],
-  "main": "dist-node/index.js",
+  "main": "dist/index.js",
   "browser": "dist-webpack/bundle.js",
   "homepage": "https://github.com/cloner02/json-form-cloner#readme",
   "repository": {
@@ -18,11 +18,11 @@
   },
   "scripts": {
     "clean": "node tools/clean.mjs",
-    "copy-filesToDist-node": "node tools/copyfiles.mjs --source ./src/template --destination ./dist-node/template",
-    "build-node": "npx tsc --outDir dist-node --module ES6",
-    "build": "npm run clean && npm run copy-filesToDist-node && npm run build-node",
-    "build:prod": "npm run clean && npm run copy-filesToDist-node && npm run build-node && npm run build-webpack-prod",
-    "build:dev": "npm run clean && npm run copy-filesToDist-node && npm run build-node && npm run build-webpack-dev",
+    "copy-filesToDist": "node tools/copyfiles.mjs --source ./src/template --destination ./dist/template",
+    "build-node": "npx tsc --outDir dist --module ES6",
+    "build": "npm run clean && npm run copy-filesToDist && npm run build-node",
+    "build:prod": "npm run clean && npm run copy-filesToDist && npm run build-node && npm run build-webpack-prod",
+    "build:dev": "npm run clean && npm run copy-filesToDist && npm run build-node && npm run build-webpack-dev",
     "build-webpack-prod": "npx webpack --config webpack.config.cjs --mode production",
     "build-webpack-dev": "npx webpack --config webpack.config.cjs --mode development",
     "watch:dev": "nodemon --config nodemon.json",

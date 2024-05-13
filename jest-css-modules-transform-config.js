@@ -1,5 +1,5 @@
 const path = require('path');  
-const additionalResolvePath = path.resolve(__dirname, 'dist-node', 'additional_modules');
+const additionalResolvePath = path.resolve(__dirname, 'dist', 'additional_modules');
 
 module.exports = {
     sassConfig: {
